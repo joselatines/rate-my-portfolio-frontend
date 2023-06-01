@@ -1,10 +1,13 @@
 import CreatePortfolioForm from "@/components/Forms/CreatePortfolio";
 import PortfoliosSection from "@/components/Portfolios/Section";
 import { getAllPortfolios } from "@/services/portfolios";
+import { Portfolio } from "@/shared/interfaces/portfolio.interface";
 
-async function Dashboard() {
-	const portfoliosList = await getAllPortfolios();
+type IProps = {
+	portfoliosList: Portfolio[];
+};
 
+export default function Dashboard({ portfoliosList }: IProps) {
 	return (
 		<div>
 			<span>Dashboard private</span>
@@ -14,4 +17,12 @@ async function Dashboard() {
 	);
 }
 
-export default Dashboard;
+export async function getStaticProps() {
+	const portfoliosList = await getAllPortfolios();
+
+	return {
+		props: {
+			portfoliosList,
+		},
+	};
+}

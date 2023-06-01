@@ -1,3 +1,4 @@
+import { errorApiReqHandler } from "@/errors/error-api-req-handler";
 import { AuthLogin, AuthSignUp } from "@/shared/interfaces/auth.interface";
 import axios from "axios";
 
@@ -20,8 +21,7 @@ export const login = async (credentials: AuthLogin) => {
 		const data = await res.data;
 		return data;
 	} catch (err) {
-		console.log(err);
-		return { data: null };
+		errorApiReqHandler(err);
 	}
 };
 
@@ -42,7 +42,6 @@ export const signUp = async (credentials: AuthSignUp) => {
 		const data = await res.data;
 		return data;
 	} catch (err) {
-		console.log(err);
-		return { data: null };
+		errorApiReqHandler(err);
 	}
 };

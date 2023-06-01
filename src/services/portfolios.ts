@@ -1,41 +1,37 @@
+import BadRequestError from "@/errors/bad-request";
+import { errorApiReqHandler } from "@/errors/error-api-req-handler";
 import { Portfolio } from "@/shared/interfaces/portfolio.interface";
+import axios from "axios";
 
 type GetPortfolios = () => Promise<Portfolio[]>;
-const { NEXT_PUBLIC_API_URI } = process.env;
-
-const nextJsConfig = {
-	cache: { cache: "no-store" },
-	saveCache: {
-		next: { revalidate: 86400 }, // revalidate in 24 hours
-	},
-};
+const NEXT_PUBLIC_API_URI = process.env.NEXT_PUBLIC_API_URI;
 
 export const getAllPortfolios: GetPortfolios = async () => {
-	console.log(NEXT_PUBLIC_API_URI);
-
 	try {
-		const res = await fetch(`${NEXT_PUBLIC_API_URI}/portfolios`, {
-			next: { revalidate: 100 },
-		});
+		const res = await axios.get(`${NEXT_PUBLIC_API_URI}/portfolios`);
 
-		const data = await res.json();
-		return data.data;
+		return res.data.data;
 	} catch (err) {
-		console.log(err);
+		return errorApiReqHandler(err);
 	}
 };
 
 export const newPortfolio = async (portfolio: Portfolio) => {
-	// todo: see why is not loading env variable
-	try {
-		const res = await fetch(`${NEXT_PUBLIC_API_URI}/portfolios`, {
-			method: "POST",
-			body: JSON.stringify(portfolio),
-		});
+	const options = {
+		method: "POST",
+		url: `${NEXT_PUBLIC_API_URI}/portfolios`,
+		withCredentials: true,
+		headers: {
+			"Content-Type": "application/json",
+		},
+		data: portfolio,
+	};
 
-		const data = await res.json();
-		return data;
+	try {
+		const res = await axios.request(options);
+
+		return res.data;
 	} catch (err) {
-		console.log(err);
+		return errorApiReqHandler(err);
 	}
 };

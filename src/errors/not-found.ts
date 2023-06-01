@@ -1,7 +1,7 @@
 import CustomAPIError from "./custom-error";
 
 class NotFoundError extends CustomAPIError {
-	constructor(message) {
+	constructor(message: string) {
 		super(message);
 		this.statusCode = 404;
 	}
