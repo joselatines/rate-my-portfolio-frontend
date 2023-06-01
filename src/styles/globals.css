@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+	html {
+		font-family: system-ui, Proxima Nova, sans-serif;
+	}
+}
+
+@layer components {
+	.btn {
+		@apply inline-flex gap-1 items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:w-auto;
+	}
+
+  .disabled {
+    @apply bg-blue-300 cursor-not-allowed
+  }
+	/* ... */
+}
+
+/* 
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -25,3 +43,4 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+ */
