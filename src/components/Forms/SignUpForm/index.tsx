@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import CustomTextInput from "../CustomTextInput";
-import { login } from "@/services/auth";
+import { signUp } from "@/services/auth";
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
 import { AuthSignUp } from "@/shared/interfaces/auth.interface";
 import { useRouter } from "next/router";
@@ -12,6 +12,7 @@ const validationSchema = Yup.object({
 		.min(8, "password must be 8 characters min")
 		.required(),
 	email: Yup.string().label("Email is required").email().required(),
+	username: Yup.string().label("Username is required").required(),
 });
 
 const initialValues = {
@@ -20,12 +21,12 @@ const initialValues = {
 	username: "",
 };
 
-function LoginForm() {
+function SignUpForm() {
 	const router = useRouter();
 	const handleSubmit = async (credentials: AuthSignUp) => {
-		const res = await login(credentials);
+		const res = await signUp(credentials);
 		if (toastCheckApiResponse(res)) {
-			router.push("/portfolios");
+			router.push("/auth/login");
 		}
 	};
 
@@ -51,6 +52,12 @@ function LoginForm() {
 								className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7"
 							>
 								<div>
+									<CustomTextInput
+										formik={formik}
+										label="Username"
+										name="username"
+										placeholder="fred 22"
+									/>
 									<CustomTextInput
 										formik={formik}
 										label="Email"
@@ -82,4 +89,4 @@ function LoginForm() {
 	);
 }
 
-export default LoginForm;
+export default SignUpForm;

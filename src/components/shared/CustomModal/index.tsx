@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 

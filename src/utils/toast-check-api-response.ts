@@ -1,7 +1,8 @@
 import { toast } from "react-hot-toast";
 
 export function toastCheckApiResponse(apiDataResponse: any) {
-	if (!apiDataResponse.data) {
+	console.log(apiDataResponse, 'perrar')
+	if (!apiDataResponse.data ) {
 		toast.error(apiDataResponse.error);
 		return false;
 	}

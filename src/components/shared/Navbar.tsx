@@ -16,8 +16,14 @@ function Navbar() {
 					<li className="hover:text-cyan-500 transition-colors">
 						<NextLink href="/portfolios">Portfolios</NextLink>
 					</li>
-					<li className="hover:text-cyan-500 transition-colors">
+					<li>
 						<NextLink href="/dashboard">dashboard</NextLink>
+					</li>
+					<li className="hover:text-cyan-500 transition-colors">
+						<NextLink href="/auth/sign-up">Sign up</NextLink>
+					</li>
+					<li>
+						<NextLink href="/auth/login">Login</NextLink>
 					</li>
 				</ul>
 			</div>

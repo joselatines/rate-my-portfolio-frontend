@@ -1,4 +1,3 @@
-"use client";
 import PortfolioCard from "@/components/Portfolios/PortfolioCard";
 import ModalPortfolioCard from "@/components/Portfolios/ModalPortfolioCard";
 import SkeletonPortfolioCard from "@/components/Portfolios/PortfolioCard/SkeletonPortfolioCard";

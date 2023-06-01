@@ -1,4 +1,3 @@
-"use client";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { IoIosCreate } from "react-icons/io";
