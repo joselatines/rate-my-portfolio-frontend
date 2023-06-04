@@ -9,6 +9,7 @@ import TechnologiesCheckboxes from "../TechnologiesCheckboxes";
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
 import { CreatePortfolio } from "@/shared/interfaces/portfolio.interface";
 import FileUpload from "@/components/FileUpload";
+import { toast } from "react-hot-toast";
 
 const validationSchema = Yup.object({
 	title: Yup.string().label("Full title").required(),
@@ -34,9 +35,17 @@ const inputsList = [
 ];
 
 function CreatePortfolioForm() {
-	const handleSubmit = async (portfolioData: CreatePortfolio) => {
+	const handleSubmit = async (
+		portfolioData: CreatePortfolio,
+		{ resetForm }: any
+	) => {
 		const res = await newPortfolio(portfolioData);
-		toastCheckApiResponse(res);
+		if (toastCheckApiResponse(res)) {
+			toast("You can close this", {
+				icon: "👏",
+			});
+			resetForm(initialValues);
+		}
 	};
 
 	const formik = useFormik({
