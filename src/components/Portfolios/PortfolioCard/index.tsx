@@ -1,8 +1,9 @@
-import EditPortfolioForm from "@/components/Forms/EditPortfolioForm";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { AiFillEye } from "react-icons/ai";
 import { HiOutlineExternalLink } from "react-icons/hi";
+import EditPortfolioForm from "@/components/Forms/Portfolio/EditPortfolioForm";
+import DeletePortfolio from "@/components/Forms/Portfolio/DeletePortfolio";
 
 type IProps = {
 	title: string;
@@ -46,7 +47,7 @@ function PortfolioCard({
 						By: {authorName}
 					</span>
 				</div>
-				<div className="flex gap-2 justify-center items-center">
+				<div className="flex gap-2 justify-center items-center flex-wrap">
 					<button className="btn" onClick={handleCloseModal}>
 						More detail <AiFillEye />
 					</button>
@@ -55,10 +56,13 @@ function PortfolioCard({
 					</NextLink>
 
 					{router.pathname.includes(dashboardPath) && (
-						<EditPortfolioForm
-							portfolioId={id}
-							currentValues={{ title, description, prevImage: images, live }}
-						/>
+						<>
+							<EditPortfolioForm
+								portfolioId={id}
+								currentValues={{ title, description, prevImage: images, live }}
+							/>
+							<DeletePortfolio id={id} />
+						</>
 					)}
 				</div>
 			</section>

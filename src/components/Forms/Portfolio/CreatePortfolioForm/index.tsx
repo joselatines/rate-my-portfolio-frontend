@@ -1,15 +1,15 @@
 import { useFormik } from "formik";
 import { IoIosCreate } from "react-icons/io";
 import CustomModal from "@/components/shared/CustomModal";
-import CustomTextInput from "../CustomTextInput";
-import CustomTextarea from "../CustomTextarea";
+import CustomTextInput from "../../CustomTextInput";
+import CustomTextarea from "../../CustomTextarea";
 import { newPortfolio } from "@/services/portfolios";
-import TechnologiesCheckboxes from "../TechnologiesCheckboxes";
+import TechnologiesCheckboxes from "../../TechnologiesCheckboxes";
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
 import { CreatePortfolio } from "@/shared/interfaces/portfolio.interface";
 import FileUpload from "@/components/FileUpload";
 import { useCustomModal } from "@/hooks/useCustomModal";
-import { initialValues, inputsList, validationSchema } from "./config";
+import { initialValues, inputsList, validationSchema } from "../config";
 
 function CreatePortfolioForm() {
 	const { setOpen } = useCustomModal();

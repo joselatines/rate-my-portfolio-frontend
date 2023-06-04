@@ -1,15 +1,15 @@
 import { useFormik } from "formik";
 import { AiFillEdit } from "react-icons/ai";
 import CustomModal from "@/components/shared/CustomModal";
-import CustomTextInput from "../CustomTextInput";
-import CustomTextarea from "../CustomTextarea";
+import CustomTextInput from "../../CustomTextInput";
+import CustomTextarea from "../../CustomTextarea";
 import { editPortfolio } from "@/services/portfolios";
-import TechnologiesCheckboxes from "../TechnologiesCheckboxes";
+import TechnologiesCheckboxes from "../../TechnologiesCheckboxes";
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
 import { EditPortfolio } from "@/shared/interfaces/portfolio.interface";
 import FileUpload from "@/components/FileUpload";
 import { useCustomModal } from "@/hooks/useCustomModal";
-import { inputsList, validationSchema } from "./config";
+import { inputsList, validationSchema } from "../config";
 
 type IProps = {
 	portfolioId: string;

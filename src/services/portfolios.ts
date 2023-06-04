@@ -42,6 +42,7 @@ export const newPortfolio = async (portfolio: CreatePortfolio) => {
 };
 
 export const editPortfolio = async (portfolio: EditPortfolio, id: string) => {
+	// todo not refresh image if is empty
 	const form = objectToFormData(portfolio);
 	const options = {
 		method: "PUT",
@@ -51,6 +52,22 @@ export const editPortfolio = async (portfolio: EditPortfolio, id: string) => {
 			"Content-Type": `multipart/form-data;`,
 		},
 		data: form,
+	};
+
+	try {
+		const res = await axios.request(options);
+
+		return res.data;
+	} catch (err) {
+		return errorApiReqHandler(err);
+	}
+};
+
+export const deletePortfolio = async (id: string) => {
+	const options = {
+		method: "DELETE",
+		url: `${NEXT_PUBLIC_API_URI}/portfolios/${id}`,
+		withCredentials: true,
 	};
 
 	try {
