@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { CustomModalContext } from "@/context/customModal";
+import { useContext } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 type IProps = {
@@ -8,15 +9,15 @@ type IProps = {
 };
 
 function CustomModal({ children, message, icon }: IProps) {
-	const [openModal, setOpenModal] = useState(false);
+	const { open, setOpen } = useContext(CustomModalContext);
 
 	return (
 		<>
-			<button className="btn" onClick={() => setOpenModal(true)}>
+			<button className="btn" onClick={() => setOpen(true)}>
 				{message}
 				{icon}
 			</button>
-			{openModal && (
+			{open && (
 				<div
 					className="relative z-10"
 					aria-labelledby="modal-title"
@@ -29,7 +30,7 @@ function CustomModal({ children, message, icon }: IProps) {
 						<div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-10">
 							<div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all">
 								<div className="m-5">
-									<button className="btn" onClick={() => setOpenModal(false)}>
+									<button className="btn" onClick={() => setOpen(false)}>
 										Close <AiFillCloseCircle size={25} />
 									</button>
 								</div>
