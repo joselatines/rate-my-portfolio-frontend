@@ -14,9 +14,8 @@ function PortfoliosSection({ portfoliosList }: IProps) {
 		title: "",
 		author: {
 			name: "",
-			social_media: [],
+			social_media: [{ name: "", url: "" }],
 		},
-		social_media: [{ name: "", url: "" }],
 		images: [""],
 		description: "",
 		id: "",

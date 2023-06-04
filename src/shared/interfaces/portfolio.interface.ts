@@ -44,3 +44,12 @@ export interface CreatePortfolio {
 	description: string;
 	images: Image;
 }
+
+export interface EditPortfolio {
+	technologies?: Technology[];
+	live?: string;
+	title?: string;
+	description?: string;
+	images?: Image;
+	prevImage?: string
+}

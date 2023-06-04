@@ -1,19 +1,19 @@
-import NextLink from 'next/link'
+import EditPortfolioForm from "@/components/Forms/EditPortfolioForm";
+import NextLink from "next/link";
+import { useRouter } from "next/router";
 import { AiFillEye } from "react-icons/ai";
 import { HiOutlineExternalLink } from "react-icons/hi";
-
 
 type IProps = {
 	title: string;
 	description: string;
-	images: string[];
+	images: string;
 	authorName: string;
 	live: string;
 	openModal: (id: string) => any;
 	id: string;
 };
 
-// todo: delete ?.name
 function PortfolioCard({
 	title,
 	description,
@@ -23,6 +23,8 @@ function PortfolioCard({
 	live,
 	id,
 }: IProps) {
+	const router = useRouter();
+	const dashboardPath = "/dashboard";
 	const handleCloseModal = () => {
 		openModal(id);
 	};
@@ -44,13 +46,20 @@ function PortfolioCard({
 						By: {authorName}
 					</span>
 				</div>
-				<div>
+				<div className="flex gap-2 justify-center items-center">
 					<button className="btn" onClick={handleCloseModal}>
 						More detail <AiFillEye />
 					</button>
-					<NextLink target='_blank' className="btn mx-2" href={live}>
-					See live app <HiOutlineExternalLink />
+					<NextLink target="_blank" className="btn mx-2" href={live}>
+						See live app <HiOutlineExternalLink />
 					</NextLink>
+
+					{router.pathname.includes(dashboardPath) && (
+						<EditPortfolioForm
+							portfolioId={id}
+							currentValues={{ title, description, prevImage: images, live }}
+						/>
+					)}
 				</div>
 			</section>
 		</div>
