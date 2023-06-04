@@ -14,9 +14,8 @@ function PortfoliosSection({ portfoliosList }: IProps) {
 		title: "",
 		author: {
 			name: "",
-			social_media: [{ name: "", url: "" }],
 		},
-		images: [""],
+		images: "",
 		description: "",
 		id: "",
 		current_votes: 0,
@@ -37,6 +36,9 @@ function PortfoliosSection({ portfoliosList }: IProps) {
 		setModalOpen(false);
 	};
 
+	if (portfoliosList.length === 0)
+		return <h1 className="text-3xl font-bod">No portfolios uploaded yet</h1>;
+
 	return (
 		<>
 			{modalOpen && (
@@ -50,7 +52,7 @@ function PortfoliosSection({ portfoliosList }: IProps) {
 					? portfoliosList.map(
 							({ live, title, author, description, images, id }) => (
 								<PortfolioCard
-									key={title + author}
+									key={id}
 									images={images}
 									title={title}
 									authorName={author.name}
@@ -61,7 +63,7 @@ function PortfoliosSection({ portfoliosList }: IProps) {
 								/>
 							)
 					  )
-					: [1, 2, 3].map(n => <SkeletonPortfolioCard />)}
+					: [1, 2, 3].map(n => <SkeletonPortfolioCard key={n} />)}
 			</section>
 		</>
 	);

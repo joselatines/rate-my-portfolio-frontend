@@ -74,6 +74,7 @@ function SignUpForm() {
 
 								<div className="relative">
 									<button
+									type="submit"
 										disabled={formik.isSubmitting}
 										className={`btn ${formik.isSubmitting && "disabled"}`}
 									>

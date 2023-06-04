@@ -20,7 +20,10 @@ function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
 	} = portfolio;
 	const { social_media } = author;
 
-	const ICONS = { github: <AiFillGithub size={25} /> };
+	const ICONS: { [key: string]: JSX.Element } = {
+		github: <AiFillGithub size={25} />,
+	};
+
 	return (
 		<div
 			className="relative z-10"
@@ -60,7 +63,7 @@ function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
 								</div>
 								<div className="mt-6 flex justify-end items-center gap-1">
 									{social_media.map(({ name, url }) => (
-										<NextLink target="_blank" href={url}>
+										<NextLink target="_blank" key={url} href={url}>
 											{ICONS[name]}
 										</NextLink>
 									))}

@@ -6,7 +6,7 @@ export interface Portfolio {
 	description: string;
 	current_votes: number;
 	author: Author;
-	images: string[];
+	images: string;
 }
 
 interface Image {
@@ -29,7 +29,6 @@ interface Technology {
 
 interface Author {
 	name: string;
-	social_media: SocialMedia[];
 }
 
 interface SocialMedia {
@@ -51,5 +50,5 @@ export interface EditPortfolio {
 	title?: string;
 	description?: string;
 	images?: Image;
-	prevImage?: string
+	prevImage?: string;
 }

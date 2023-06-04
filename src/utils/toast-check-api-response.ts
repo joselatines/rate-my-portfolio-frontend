@@ -2,7 +2,7 @@ import { toast } from "react-hot-toast";
 
 export function toastCheckApiResponse(apiDataResponse: any) {
 	if (apiDataResponse.error) {
-		toast.error(apiDataResponse.message);
+		toast.error(apiDataResponse.error);
 		return false;
 	}
 
