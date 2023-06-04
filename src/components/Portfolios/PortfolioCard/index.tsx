@@ -8,7 +8,7 @@ import DeletePortfolio from "@/components/Forms/Portfolio/DeletePortfolio";
 type IProps = {
 	title: string;
 	description: string;
-	images: string;
+	thumbnail_path: string;
 	authorName: string;
 	live: string;
 	openModal: (id: string) => any;
@@ -18,7 +18,7 @@ type IProps = {
 function PortfolioCard({
 	title,
 	description,
-	images,
+	thumbnail_path,
 	authorName,
 	openModal,
 	live,
@@ -36,7 +36,7 @@ function PortfolioCard({
 				/* width={200}
 				height={100} */
 				className="w-full bg-cover h-64"
-				src={images[0]}
+				src={thumbnail_path}
 				alt={title}
 			/>
 			<section className="px-6 py-4">
@@ -59,7 +59,12 @@ function PortfolioCard({
 						<>
 							<EditPortfolioForm
 								portfolioId={id}
-								currentValues={{ title, description, prevImage: images, live }}
+								currentValues={{
+									title,
+									description,
+									prevImage: thumbnail_path,
+									live,
+								}}
 							/>
 							<DeletePortfolio id={id} />
 						</>

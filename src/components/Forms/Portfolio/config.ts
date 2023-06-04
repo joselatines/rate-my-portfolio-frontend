@@ -11,7 +11,7 @@ export const initialValues = {
 	description: "",
 	live: "",
 	technologies: [],
-	images: { fileName: "", file: {} },
+	thumbnail_path: { fileName: "", file: {} },
 };
 
 export const inputsList = [

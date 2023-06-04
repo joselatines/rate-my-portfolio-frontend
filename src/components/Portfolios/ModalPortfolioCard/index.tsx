@@ -10,7 +10,7 @@ type IProps = {
 
 function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
 	const {
-		images,
+		thumbnail_path,
 		title,
 		description,
 		current_votes,
@@ -18,7 +18,6 @@ function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
 		live,
 		technologies,
 	} = portfolio;
-	const { social_media } = author;
 
 	const ICONS: { [key: string]: JSX.Element } = {
 		github: <AiFillGithub size={25} />,
@@ -48,7 +47,7 @@ function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
 										/* width={200}
 				height={100} */
 										className="w-full max-h-[60vh] bg-cover mb-5"
-										src={images[0]}
+										src={thumbnail_path}
 										alt={title}
 									/>
 								</div>
@@ -62,11 +61,6 @@ function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
 									<span>Average: {current_votes / 2}</span>
 								</div>
 								<div className="mt-6 flex justify-end items-center gap-1">
-									{social_media.map(({ name, url }) => (
-										<NextLink target="_blank" key={url} href={url}>
-											{ICONS[name]}
-										</NextLink>
-									))}
 									<NextLink href={live} target="_blank" className="btn">
 										See live
 										<HiOutlineExternalLink />

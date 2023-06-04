@@ -6,7 +6,7 @@ export interface Portfolio {
 	description: string;
 	current_votes: number;
 	author: Author;
-	images: string;
+	thumbnail_path: string;
 }
 
 interface Image {
@@ -41,7 +41,7 @@ export interface CreatePortfolio {
 	live: string;
 	title: string;
 	description: string;
-	images: Image;
+	thumbnail_path: Image;
 }
 
 export interface EditPortfolio {
@@ -49,6 +49,6 @@ export interface EditPortfolio {
 	live?: string;
 	title?: string;
 	description?: string;
-	images?: Image;
+	thumbnail_path?: Image;
 	prevImage?: string;
 }

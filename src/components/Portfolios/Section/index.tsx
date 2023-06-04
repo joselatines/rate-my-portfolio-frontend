@@ -15,7 +15,7 @@ function PortfoliosSection({ portfoliosList }: IProps) {
 		author: {
 			name: "",
 		},
-		images: "",
+		thumbnail_path: "",
 		description: "",
 		id: "",
 		current_votes: 0,
@@ -50,10 +50,10 @@ function PortfoliosSection({ portfoliosList }: IProps) {
 			<section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
 				{portfoliosList
 					? portfoliosList.map(
-							({ live, title, author, description, images, id }) => (
+							({ live, title, author, description, thumbnail_path, id }) => (
 								<PortfolioCard
 									key={id}
-									images={images}
+									thumbnail_path={thumbnail_path}
 									title={title}
 									authorName={author.name}
 									description={description}

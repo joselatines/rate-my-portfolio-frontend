@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const inputName = "images";
+const inputName = "thumbnail_path";
 
 export default function FileUpload({ formik }: any) {
 	const [file, setFile] = useState("");

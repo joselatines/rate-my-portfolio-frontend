@@ -20,7 +20,7 @@ function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
 	const { setOpen } = useCustomModal();
 	const initialValues = {
 		...currentValues,
-		images: { fileName: "", file: {} },
+		thumbnail_path: { fileName: "", file: {} },
 	};
 
 	const handleSubmit = async (
