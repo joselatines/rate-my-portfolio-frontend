@@ -17,7 +17,6 @@ export const login = async (credentials: AuthLogin) => {
 
 	try {
 		const res = await axios.request(options);
-		console.log("aqui: ", res);
 		const data = await res.data;
 		return data;
 	} catch (err) {

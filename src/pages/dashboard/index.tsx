@@ -1,4 +1,4 @@
-import CreatePortfolioForm from "@/components/Forms/CreatePortfolio";
+import CreatePortfolioForm from "@/components/Forms/CreatePortfolioForm";
 import PortfoliosSection from "@/components/Portfolios/Section";
 import { getAllPortfolios } from "@/services/portfolios";
 import { Portfolio } from "@/shared/interfaces/portfolio.interface";
