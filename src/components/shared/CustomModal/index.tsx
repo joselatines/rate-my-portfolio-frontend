@@ -1,5 +1,4 @@
-import { CustomModalContext } from "@/context/customModal";
-import { useContext } from "react";
+import { useCustomModal } from "@/hooks/useCustomModal";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 type IProps = {
@@ -9,7 +8,7 @@ type IProps = {
 };
 
 function CustomModal({ children, message, icon }: IProps) {
-	const { open, setOpen } = useContext(CustomModalContext);
+	const { open, setOpen } = useCustomModal();
 
 	return (
 		<>

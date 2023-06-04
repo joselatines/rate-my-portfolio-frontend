@@ -1,4 +1,3 @@
-import * as Yup from "yup";
 import { useFormik } from "formik";
 import { IoIosCreate } from "react-icons/io";
 import CustomModal from "@/components/shared/CustomModal";
@@ -9,41 +8,19 @@ import TechnologiesCheckboxes from "../TechnologiesCheckboxes";
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
 import { CreatePortfolio } from "@/shared/interfaces/portfolio.interface";
 import FileUpload from "@/components/FileUpload";
-import { toast } from "react-hot-toast";
-
-const validationSchema = Yup.object({
-	title: Yup.string().label("Full title").required(),
-	description: Yup.string().label("Full description").required(),
-	live: Yup.string().label("Live app link is required").required(),
-});
-
-const initialValues = {
-	title: "",
-	description: "",
-	live: "",
-	technologies: [],
-	images: { fileName: "", file: {} },
-};
-
-const inputsList = [
-	{ label: "Title", name: "title", placeholder: "My first portfolio" },
-	{
-		label: "Live app link",
-		name: "live",
-		placeholder: "https://joselatines.vercel.app/",
-	},
-];
+import { useCustomModal } from "@/hooks/useCustomModal";
+import { initialValues, inputsList, validationSchema } from "./config";
 
 function CreatePortfolioForm() {
+	const { setOpen } = useCustomModal();
+
 	const handleSubmit = async (
 		portfolioData: CreatePortfolio,
 		{ resetForm }: any
 	) => {
 		const res = await newPortfolio(portfolioData);
 		if (toastCheckApiResponse(res)) {
-			toast("You can close this", {
-				icon: "👏",
-			});
+			setOpen(false);
 			resetForm(initialValues);
 		}
 	};

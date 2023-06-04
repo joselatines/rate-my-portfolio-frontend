@@ -5,7 +5,7 @@ export const useCustomModal = () => {
 	const context = useContext(CustomModalContext);
 	
 	if (context === undefined) {
-		throw new Error("useCustomModal must be used within a CustomModalContext");
+		throw new Error("useCustomModal must be used within a CustomModalContext (check _app.tsx)");
 	}
 
 	return context;
