@@ -8,11 +8,11 @@ import TechnologiesCheckboxes from "../../TechnologiesCheckboxes";
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
 import { CreatePortfolio } from "@/shared/interfaces/portfolio.interface";
 import FileUpload from "@/components/FileUpload";
-import { useCustomModal } from "@/hooks/useCustomModal";
 import { initialValues, inputsList, validationSchema } from "../config";
+import { useState } from "react";
 
 function CreatePortfolioForm() {
-	const { setOpen } = useCustomModal();
+	const [openModal, setOpenModal] = useState(false);
 
 	const handleSubmit = async (
 		portfolioData: CreatePortfolio,
@@ -20,7 +20,7 @@ function CreatePortfolioForm() {
 	) => {
 		const res = await newPortfolio(portfolioData);
 		if (toastCheckApiResponse(res)) {
-			setOpen(false);
+			setOpenModal(false);
 			resetForm(initialValues);
 		}
 	};
@@ -32,7 +32,12 @@ function CreatePortfolioForm() {
 	});
 
 	return (
-		<CustomModal message="New portfolio" icon={<IoIosCreate />}>
+		<CustomModal
+			open={openModal}
+			setOpen={setOpenModal}
+			message="New portfolio"
+			icon={<IoIosCreate />}
+		>
 			<form
 				onSubmit={formik.handleSubmit}
 				className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-[60vw]"

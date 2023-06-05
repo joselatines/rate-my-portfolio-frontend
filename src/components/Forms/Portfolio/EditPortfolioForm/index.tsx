@@ -8,8 +8,8 @@ import TechnologiesCheckboxes from "../../TechnologiesCheckboxes";
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
 import { EditPortfolio } from "@/shared/interfaces/portfolio.interface";
 import FileUpload from "@/components/FileUpload";
-import { useCustomModal } from "@/hooks/useCustomModal";
 import { inputsList, validationSchema } from "../config";
+import { useState } from "react";
 
 type IProps = {
 	portfolioId: string;
@@ -17,7 +17,8 @@ type IProps = {
 };
 
 function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
-	const { setOpen } = useCustomModal();
+	const [openModal, setOpenModal] = useState(false);
+
 	const initialValues = {
 		...currentValues,
 		thumbnail_path: { fileName: "", file: {} },
@@ -29,7 +30,7 @@ function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
 	) => {
 		const res = await editPortfolio(portfolioData, portfolioId);
 		if (toastCheckApiResponse(res)) {
-			setOpen(false);
+			setOpenModal(false);
 			resetForm(initialValues);
 		}
 	};
@@ -41,7 +42,7 @@ function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
 	});
 
 	return (
-		<CustomModal message="Edit portfolio" icon={<AiFillEdit />}>
+		<CustomModal open={openModal} setOpen={setOpenModal} message="Edit portfolio" icon={<AiFillEdit />}>
 			<form
 				onSubmit={formik.handleSubmit}
 				className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-[60vw]"

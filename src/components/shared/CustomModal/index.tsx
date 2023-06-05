@@ -1,15 +1,14 @@
-import { useCustomModal } from "@/hooks/useCustomModal";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 type IProps = {
 	children: JSX.Element;
 	message: string;
 	icon?: JSX.Element;
+	open: boolean;
+	setOpen: (state: boolean) => any;
 };
 
-function CustomModal({ children, message, icon }: IProps) {
-	const { open, setOpen } = useCustomModal();
-
+function CustomModal({ children, message, icon, open, setOpen }: IProps) {
 	return (
 		<>
 			<button className="btn" onClick={() => setOpen(true)}>
