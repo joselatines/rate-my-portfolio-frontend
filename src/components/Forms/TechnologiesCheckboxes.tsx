@@ -7,8 +7,8 @@ type IProps = {
 };
 
 const technologies = [
-	{ name: "javascript", icon: <IoLogoJavascript /> },
-	{ name: "react", icon: <FaReact /> },
+	{ name: "javascript", icon: <IoLogoJavascript />, checked: false },
+	{ name: "react", icon: <FaReact />, checked: true },
 ];
 
 export default function TechnologiesCheckboxes({ formik, arrayName }: IProps) {

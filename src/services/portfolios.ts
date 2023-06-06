@@ -5,6 +5,7 @@ import {
 	Portfolio,
 } from "@/shared/interfaces/portfolio.interface";
 import { objectToFormData } from "@/utils/object-to-formData";
+import { serialize } from "object-to-formdata";
 import axios from "axios";
 
 type GetPortfolios = () => Promise<Portfolio[]>;
@@ -21,7 +22,10 @@ export const getAllPortfolios: GetPortfolios = async () => {
 };
 
 export const newPortfolio = async (portfolio: CreatePortfolio) => {
-	const form = objectToFormData(portfolio);
+	// const form = objectToFormData(portfolio);
+	const form = serialize(portfolio);
+	console.log({portfolio,  form });
+
 	const options = {
 		method: "POST",
 		url: `${NEXT_PUBLIC_API_URI}/portfolios`,

@@ -1,5 +1,5 @@
 export interface Portfolio {
-	technologies: Technology[];
+	technologies: string[];
 	live: string;
 	id: string;
 	title: string;
@@ -21,10 +21,6 @@ export interface File {
 	lastModifiedDate: number;
 }
 
-interface Technology {
-	name: string;
-	icon: string;
-}
 
 interface Author {
 	name: string;
@@ -39,7 +35,7 @@ export interface CreatePortfolio {
 }
 
 export interface EditPortfolio {
-	technologies?: Technology[];
+	technologies?: string[];
 	live?: string;
 	title?: string;
 	description?: string;

@@ -2,7 +2,6 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { AiFillEye } from "react-icons/ai";
 import { HiOutlineExternalLink } from "react-icons/hi";
-import EditPortfolioForm from "@/components/Forms/Portfolio/EditPortfolioForm";
 import DeletePortfolio from "@/components/Forms/Portfolio/DeletePortfolio";
 
 type IProps = {
@@ -57,15 +56,6 @@ function PortfolioCard({
 
 					{router.pathname.includes(dashboardPath) && (
 						<>
-							<EditPortfolioForm
-								portfolioId={id}
-								currentValues={{
-									title,
-									description,
-									prevImage: thumbnail_path,
-									live,
-								}}
-							/>
 							<DeletePortfolio id={id} />
 						</>
 					)}

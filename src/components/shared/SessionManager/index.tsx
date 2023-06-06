@@ -11,6 +11,9 @@ const userCookie = "user";
 function SessionManager() {
 	const router = useRouter();
 	const [refresh, setRefresh] = useState(0);
+
+	useEffect(() => {}, [refresh]);
+
 	const handleLogout = async () => {
 		const res = await logout();
 		if (toastCheckApiResponse(res)) {

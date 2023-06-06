@@ -36,7 +36,7 @@ export default function FileUpload({ formik }: any) {
 				onChange={handleChange}
 				onBlur={formik.handleBlur}
 			/>
-			<button onClick={uploadFile}>Upload</button>
+			{/* 		<button onClick={uploadFile}>Upload</button> */}
 		</div>
 	);
 }
