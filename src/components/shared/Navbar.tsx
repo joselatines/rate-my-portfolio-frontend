@@ -1,4 +1,3 @@
-import { login } from "@/services/auth";
 import NextLink from "next/link";
 import SessionManager from "./SessionManager";
 

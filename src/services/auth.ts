@@ -44,3 +44,19 @@ export const signUp = async (credentials: AuthSignUp) => {
 		errorApiReqHandler(err);
 	}
 };
+
+export const logout = async () => {
+	const options = {
+		method: "POST",
+		url: `${NEXT_PUBLIC_API_URI}/auth/logout`,
+		withCredentials: true,
+	};
+
+	try {
+		const res = await axios.request(options);
+		const data = await res.data;
+		return data;
+	} catch (err) {
+		errorApiReqHandler(err);
+	}
+};
