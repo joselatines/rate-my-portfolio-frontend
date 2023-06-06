@@ -23,7 +23,7 @@ export default function FileUpload({ formik }: any) {
 	const uploadFile = async (e: any) => {
 		const formData = new FormData();
 		formData.append("file", file);
-		formData.append("fileName", fileName);
+		formData.append("name", fileName);
 	};
 
 	return (

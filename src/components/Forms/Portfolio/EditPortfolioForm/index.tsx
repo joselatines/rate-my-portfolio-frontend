@@ -8,7 +8,11 @@ import TechnologiesCheckboxes from "../../TechnologiesCheckboxes";
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
 import { EditPortfolio } from "@/shared/interfaces/portfolio.interface";
 import FileUpload from "@/components/FileUpload";
-import { inputsList, validationSchema } from "../config";
+import {
+	checkImageAndTechFields,
+	inputsList,
+	validationSchema,
+} from "../config";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
@@ -23,7 +27,13 @@ function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
 
 	const initialValues = {
 		...currentValues,
-		thumbnail_path: { fileName: "", file: {} },
+		thumbnail_path: {
+			webkitRelativePath: "",
+			type: "",
+			size: 0,
+			name: "",
+			lastModifiedDate: 0,
+		},
 	};
 
 	const handleSubmit = async (
@@ -31,6 +41,7 @@ function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
 		{ resetForm }: any
 	) => {
 		const res = await editPortfolio(portfolioData, portfolioId);
+
 		if (toastCheckApiResponse(res)) {
 			setOpenModal(false);
 			resetForm(initialValues);

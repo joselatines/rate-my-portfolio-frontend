@@ -10,11 +10,10 @@ export interface Portfolio {
 }
 
 interface Image {
-	fileName: string;
-	file: any;
+	name: string;
 }
 
-interface File {
+export interface File {
 	webkitRelativePath: string;
 	type: string;
 	size: number;
@@ -31,17 +30,12 @@ interface Author {
 	name: string;
 }
 
-interface SocialMedia {
-	name: string;
-	url: string;
-}
-
 export interface CreatePortfolio {
-	technologies: Technology[];
+	technologies: string[];
 	live: string;
 	title: string;
 	description: string;
-	thumbnail_path: Image;
+	thumbnail_path: File;
 }
 
 export interface EditPortfolio {

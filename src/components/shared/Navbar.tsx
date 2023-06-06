@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import SessionManager from "./SessionManager";
-
+// fix render
 function Navbar() {
 	return (
 		<nav className="shadow bg-white">

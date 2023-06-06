@@ -8,23 +8,33 @@ import TechnologiesCheckboxes from "../../TechnologiesCheckboxes";
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
 import { CreatePortfolio } from "@/shared/interfaces/portfolio.interface";
 import FileUpload from "@/components/FileUpload";
-import { initialValues, inputsList, validationSchema } from "../config";
+import {
+	checkImageAndTechFields,
+	initialValues,
+	inputsList,
+	validationSchema,
+} from "../config";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
 function CreatePortfolioForm() {
 	const [openModal, setOpenModal] = useState(false);
 	const router = useRouter();
-	
+
 	const handleSubmit = async (
 		portfolioData: CreatePortfolio,
 		{ resetForm }: any
 	) => {
-		const res = await newPortfolio(portfolioData);
-		if (toastCheckApiResponse(res)) {
-			setOpenModal(false);
-			resetForm(initialValues);
-			router.push("/dashboard");
+		const imageFile = portfolioData.thumbnail_path;
+		const technologiesArray = portfolioData.technologies;
+
+		if (checkImageAndTechFields(imageFile, technologiesArray)) {
+			const res = await newPortfolio(portfolioData);
+			if (toastCheckApiResponse(res)) {
+				setOpenModal(false);
+				resetForm(initialValues);
+				router.push("/dashboard");
+			}
 		}
 	};
 

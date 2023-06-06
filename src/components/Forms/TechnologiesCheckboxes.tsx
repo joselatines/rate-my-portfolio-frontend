@@ -40,6 +40,9 @@ export default function TechnologiesCheckboxes({ formik, arrayName }: IProps) {
 					/>
 				</label>
 			))}
+			{formik.touched[arrayName] && formik.errors[arrayName] && (
+				<span className="text-red-400">{formik.errors[arrayName]}</span>
+			)}
 		</div>
 	);
 }

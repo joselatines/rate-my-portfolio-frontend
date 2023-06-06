@@ -26,7 +26,7 @@ function SessionManager() {
 	const cookiesExits = Cookies.get(tokenCookie) && Cookies.get(userCookie);
 
 	return (
-		<>
+		<div>
 			{cookiesExits ? (
 				<div className="flex items-center gap-5">
 					<li>
@@ -49,7 +49,7 @@ function SessionManager() {
 					</li>
 				</div>
 			)}
-		</>
+		</div>
 	);
 }
 
