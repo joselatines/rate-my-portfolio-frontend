@@ -10,6 +10,7 @@ import { EditPortfolio } from "@/shared/interfaces/portfolio.interface";
 import FileUpload from "@/components/FileUpload";
 import { inputsList, validationSchema } from "../config";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 type IProps = {
 	portfolioId: string;
@@ -18,6 +19,7 @@ type IProps = {
 
 function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
 	const [openModal, setOpenModal] = useState(false);
+	const router = useRouter();
 
 	const initialValues = {
 		...currentValues,
@@ -32,6 +34,7 @@ function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
 		if (toastCheckApiResponse(res)) {
 			setOpenModal(false);
 			resetForm(initialValues);
+			router.push("/dashboard");
 		}
 	};
 
@@ -42,7 +45,12 @@ function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
 	});
 
 	return (
-		<CustomModal open={openModal} setOpen={setOpenModal} message="Edit portfolio" icon={<AiFillEdit />}>
+		<CustomModal
+			open={openModal}
+			setOpen={setOpenModal}
+			message="Edit portfolio"
+			icon={<AiFillEdit />}
+		>
 			<form
 				onSubmit={formik.handleSubmit}
 				className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-[60vw]"
