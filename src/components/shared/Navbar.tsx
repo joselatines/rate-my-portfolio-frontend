@@ -13,9 +13,6 @@ function Navbar() {
 					<li className="hover:text-cyan-500 transition-colors">
 						<NextLink href="/portfolios">Portfolios</NextLink>
 					</li>
-					<li>
-						<NextLink href="/dashboard">dashboard</NextLink>
-					</li>
 
 					<SessionManager />
 				</ul>
