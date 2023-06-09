@@ -1,4 +1,5 @@
 import NextLink from "next/link";
+import NextImage from "next/image";
 import { useRouter } from "next/router";
 import { AiFillEye } from "react-icons/ai";
 import { HiOutlineExternalLink } from "react-icons/hi";
@@ -37,9 +38,9 @@ function PortfolioCard({
 
 	return (
 		<div className="max-w-lg min-w-sm rounded overflow-hidden shadow-lg ">
-			<img
-				/* width={200}
-				height={100} */
+			<NextImage
+				width={200}
+				height={100}
 				className="w-full bg-cover h-64"
 				src={thumbnail_path}
 				alt={title}

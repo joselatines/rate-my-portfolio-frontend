@@ -26,7 +26,7 @@ export const getAllPortfolios: GetPortfolios = async () => {
 export const getAllUserPortfolios: GetPortfolios = async () => {
 	try {
 		const res = await axios.get(`${NEXT_PUBLIC_API_URI}/portfolios/all`);
-		console.log({ res });
+
 		return res.data.data;
 	} catch (err) {
 		return errorApiReqHandler(err);
@@ -34,9 +34,7 @@ export const getAllUserPortfolios: GetPortfolios = async () => {
 };
 
 export const newPortfolio = async (portfolio: CreatePortfolio) => {
-	// const form = objectToFormData(portfolio);
 	const form = serialize(portfolio);
-	console.log({ portfolio, form });
 
 	const options = {
 		method: "POST",
@@ -83,7 +81,6 @@ export const ratePortfolio = async (
 	portfolioId: string,
 	rateOptions: RatePortfolio
 ) => {
-	console.log(rateOptions);
 	const options = {
 		method: "POST",
 		url: `${NEXT_PUBLIC_API_URI}/portfolios/${portfolioId}/rate`,
@@ -93,7 +90,7 @@ export const ratePortfolio = async (
 
 	try {
 		const res = await axios.request(options);
-		console.log({ res });
+
 		return res.data;
 	} catch (err) {
 		return { error: "You need to login" };

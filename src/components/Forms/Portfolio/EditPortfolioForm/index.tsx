@@ -38,7 +38,7 @@ function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
 		{ resetForm }: any
 	) => {
 		console.log(portfolioData);
-		const res =await editPortfolio(portfolioData, portfolioId);
+		const res = await editPortfolio(portfolioData, portfolioId);
 
 		if (toastCheckApiResponse(res)) {
 			setOpenModal(false);
@@ -82,7 +82,7 @@ function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
 
 				<TechnologiesCheckboxes formik={formik} arrayName="technologies" />
 				{currentValues.technologies?.map(tech => (
-					<span>{tech}</span>
+					<span key={tech}>{tech}</span>
 				))}
 				<NextImage
 					src={currentValues.prevImage || ""}

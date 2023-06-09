@@ -1,3 +1,4 @@
+import NextImage from "next/image";
 import NextLink from "next/link";
 import { AiFillCloseCircle, AiFillGithub } from "react-icons/ai";
 import { HiOutlineExternalLink } from "react-icons/hi";
@@ -43,15 +44,15 @@ function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
 						<div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 grid grid-cols-1 md:grid-cols-3 gap-5">
 							<section className="col-span-2">
 								<div>
-									<img
-										/* width={200}
-				height={100} */
+									<NextImage
+										width={200}
+										height={100}
 										className="w-full max-h-[60vh] bg-cover mb-5"
 										src={thumbnail_path}
 										alt={title}
 									/>
 								</div>
-								<div>{technologies.map(tech => tech.name)}</div>
+								<div>{technologies.map(tech => tech)}</div>
 							</section>
 							<section className="min-w-full">
 								<h2 className="text-xl font-bold">{title}</h2>
