@@ -4,7 +4,6 @@ import { AiFillEye } from "react-icons/ai";
 import { HiOutlineExternalLink } from "react-icons/hi";
 import DeletePortfolio from "@/components/Forms/Portfolio/DeletePortfolio";
 import RateCard from "./RateCard";
-import useCookie from "@/hooks/useCookie";
 
 type IProps = {
 	title: string;
@@ -35,8 +34,6 @@ function PortfolioCard({
 	const handleCloseModal = () => {
 		openModal(id);
 	};
-
-	const [cookie] = useCookie("user", "");
 
 	return (
 		<div className="max-w-lg min-w-sm rounded overflow-hidden shadow-lg ">

@@ -93,10 +93,10 @@ export const ratePortfolio = async (
 
 	try {
 		const res = await axios.request(options);
-
+		console.log({ res });
 		return res.data;
 	} catch (err) {
-		return errorApiReqHandler(err);
+		return { error: "You need to login" };
 	}
 };
 
