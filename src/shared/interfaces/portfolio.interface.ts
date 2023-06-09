@@ -5,12 +5,18 @@ export interface Portfolio {
 	title: string;
 	description: string;
 	current_votes: number;
+	current_rate_avg: number;
 	author: Author;
 	thumbnail_path: string;
 }
 
 interface Image {
 	name: string;
+}
+
+export interface RatePortfolio {
+	feedback?: string;
+	rate?: number;
 }
 
 export interface File {
@@ -20,7 +26,6 @@ export interface File {
 	name: string;
 	lastModifiedDate: number;
 }
-
 
 interface Author {
 	name: string;

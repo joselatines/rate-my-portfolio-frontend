@@ -12,7 +12,6 @@ export async function middleware(request: NextRequest) {
 	}
 	const jwt = await request.cookies.get(TOKEN_NAME)?.value;
 
-	console.log({ jwt, TOKEN_NAME });
 	if (!jwt) return NextResponse.redirect(new URL("/auth/login", request.url));
 }
 

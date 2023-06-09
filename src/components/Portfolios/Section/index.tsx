@@ -10,47 +10,49 @@ type IProps = {
 
 function PortfoliosSection({ portfoliosList }: IProps) {
 	const [modalOpen, setModalOpen] = useState(false);
-	const [modalPortfolioData, setModalPortfolioData] = useState<Portfolio>({
-		title: "",
-		author: {
-			name: "",
-		},
-		thumbnail_path: "",
-		description: "",
-		id: "",
-		current_votes: 0,
-		technologies: [{ name: "", icon: "" }],
-		live: "/",
-	});
+	const [modalPortfolioData, setModalPortfolioData] =
+		useState<Portfolio | null>(null);
 
 	const handleOpenModal = (portfolioId: string) => {
-		const portfolioFound = portfoliosList.filter(
+		const portfolioFound = portfoliosList.find(
 			portfolio => portfolio.id === portfolioId
-		)[0];
+		);
 
-		setModalPortfolioData(portfolioFound);
-		setModalOpen(true);
+		if (portfolioFound) {
+			setModalPortfolioData(portfolioFound);
+			setModalOpen(true);
+		}
 	};
 
 	const handleCloseModal = () => {
 		setModalOpen(false);
 	};
-
-	if (portfoliosList.length === 0)
+	console.log({ portfoliosList });
+	if (portfoliosList.length === 0) {
 		return <h1 className="text-3xl font-bod">No portfolios uploaded yet</h1>;
+	}
 
 	return (
 		<>
 			{modalOpen && (
 				<ModalPortfolioCard
 					closeModal={handleCloseModal}
-					portfolio={modalPortfolioData}
+					portfolio={modalPortfolioData!}
 				/>
 			)}
 			<section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-				{portfoliosList
+				{portfoliosList.length > 0
 					? portfoliosList.map(
-							({ live, title, author, description, thumbnail_path, id }) => (
+							({
+								live,
+								title,
+								current_rate_avg,
+								author,
+								description,
+								thumbnail_path,
+								id,
+								current_votes,
+							}) => (
 								<PortfolioCard
 									key={id}
 									thumbnail_path={thumbnail_path}
@@ -59,6 +61,8 @@ function PortfoliosSection({ portfoliosList }: IProps) {
 									description={description}
 									id={id}
 									live={live}
+									currentRateAvg={current_rate_avg}
+									currentVotes={current_votes}
 									openModal={handleOpenModal}
 								/>
 							)

@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import { AiFillEye } from "react-icons/ai";
 import { HiOutlineExternalLink } from "react-icons/hi";
 import DeletePortfolio from "@/components/Forms/Portfolio/DeletePortfolio";
+import RateCard from "./RateCard";
+import useCookie from "@/hooks/useCookie";
 
 type IProps = {
 	title: string;
@@ -12,6 +14,8 @@ type IProps = {
 	live: string;
 	openModal: (id: string) => any;
 	id: string;
+	currentRateAvg: number;
+	currentVotes: number;
 };
 
 function PortfolioCard({
@@ -19,7 +23,10 @@ function PortfolioCard({
 	description,
 	thumbnail_path,
 	authorName,
+	currentRateAvg,
+	currentVotes,
 	openModal,
+
 	live,
 	id,
 }: IProps) {
@@ -28,6 +35,8 @@ function PortfolioCard({
 	const handleCloseModal = () => {
 		openModal(id);
 	};
+
+	const [cookie] = useCookie("user", "");
 
 	return (
 		<div className="max-w-lg min-w-sm rounded overflow-hidden shadow-lg ">
@@ -53,6 +62,12 @@ function PortfolioCard({
 					<NextLink target="_blank" className="btn mx-2" href={live}>
 						See live app <HiOutlineExternalLink />
 					</NextLink>
+
+					<RateCard
+						portfolioId={id}
+						currentVotes={currentVotes}
+						currentRateAvg={currentRateAvg}
+					/>
 
 					{router.pathname.includes(dashboardPath) && (
 						<>
