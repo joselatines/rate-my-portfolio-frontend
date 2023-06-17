@@ -3,6 +3,7 @@ import NextLink from "next/link";
 import { AiFillCloseCircle, AiFillGithub } from "react-icons/ai";
 import { HiOutlineExternalLink } from "react-icons/hi";
 import { Portfolio } from "@/shared/interfaces/portfolio.interface";
+import { parseImg } from "@/utils/parse-img";
 
 type IProps = {
 	portfolio: Portfolio;
@@ -48,7 +49,7 @@ function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
 										width={200}
 										height={100}
 										className="w-full max-h-[60vh] bg-cover mb-5"
-										src={thumbnail_path}
+										src={parseImg(thumbnail_path)}
 										alt={title}
 									/>
 								</div>

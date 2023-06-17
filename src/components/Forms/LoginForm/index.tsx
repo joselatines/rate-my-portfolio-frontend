@@ -1,10 +1,11 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import CustomTextInput from "../CustomTextInput";
-import { login } from "@/services/auth";
+import { login as apiLogin } from "@/services/auth";
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
 import { AuthSignUp } from "@/shared/interfaces/auth.interface";
 import { useRouter } from "next/router";
+import { useContextUser } from "@/hooks/useContextUser";
 
 const validationSchema = Yup.object({
 	password: Yup.string()
@@ -22,10 +23,13 @@ const initialValues = {
 
 function LoginForm() {
 	const router = useRouter();
+	const { login } = useContextUser();
+	
 	const handleSubmit = async (credentials: AuthSignUp) => {
-		const res = await login(credentials);
+		const res = await apiLogin(credentials);
 		if (toastCheckApiResponse(res)) {
 			router.push("/portfolios");
+			login();
 		}
 	};
 

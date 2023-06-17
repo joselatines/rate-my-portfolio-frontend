@@ -16,6 +16,7 @@ import {
 } from "../config";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { toast } from "react-hot-toast";
 
 function CreatePortfolioForm() {
 	const [openModal, setOpenModal] = useState(false);
@@ -29,11 +30,18 @@ function CreatePortfolioForm() {
 		const technologiesArray = portfolioData.technologies;
 
 		if (checkImageAndTechFields(imageFile, technologiesArray)) {
-			const res = await newPortfolio(portfolioData);
-			if (toastCheckApiResponse(res)) {
-				setOpenModal(false);
-				resetForm(initialValues);
-				router.push("/dashboard");
+			try {
+				const res = await newPortfolio(portfolioData);
+
+				if (res.status === 200) {
+					toast.success(res.data.message);
+					setOpenModal(false);
+					resetForm(initialValues);
+					router.push("/portfolios");
+				}
+			} catch (error: any) {
+				console.error(error);
+				toast.error(error.message);
 			}
 		}
 	};

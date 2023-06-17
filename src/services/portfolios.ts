@@ -34,8 +34,12 @@ export const getAllUserPortfolios: GetPortfolios = async () => {
 };
 
 export const newPortfolio = async (portfolio: CreatePortfolio) => {
-	const form = serialize(portfolio);
-
+	console.log(portfolio);
+	const form = serialize({
+		...portfolio,
+		technologies: portfolio.technologies.join(","),
+	});
+	console.log(portfolio.technologies.join(","));
 	const options = {
 		method: "POST",
 		url: `${NEXT_PUBLIC_API_URI}/portfolios`,
@@ -46,13 +50,9 @@ export const newPortfolio = async (portfolio: CreatePortfolio) => {
 		data: form,
 	};
 
-	try {
-		const res = await axios.request(options);
+	const res = await axios.request(options);
 
-		return res.data;
-	} catch (err) {
-		return errorApiReqHandler(err);
-	}
+	return res;
 };
 
 export const editPortfolio = async (portfolio: EditPortfolio, id: string) => {

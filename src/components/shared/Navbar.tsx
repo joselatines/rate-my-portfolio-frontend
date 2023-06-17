@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { BiLogOut } from "react-icons/bi";
 import { BsGithub } from "react-icons/bs";
+import Cookies from "js-cookie";
 
-import { logout } from "@/services/auth";
+import { logout as apiLogout } from "@/services/auth";
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
 import dynamic from "next/dynamic";
-import Cookies from "js-cookie";
+import { useContextUser } from "@/hooks/useContextUser";
 
 const tokenCookie = "access_token";
 const userCookie = "user";
@@ -14,22 +15,17 @@ const DynamicNextLink = dynamic(() => import("next/link"));
 
 function Navbar() {
 	const router = useRouter();
-	const [cookiesExits, setCookiesExits] = useState<any>(false);
-	const [refresh, setRefresh] = useState(0);
+	const { isLogged, logout } = useContextUser();
 
 	const handleLogout = async () => {
-		const res = await logout();
+		const res = await apiLogout();
 		if (toastCheckApiResponse(res)) {
 			router.push("/");
-			Cookies.remove(tokenCookie);
-			Cookies.remove(userCookie);
-			setRefresh(prev => prev + 1);
+			logout();
 		}
 	};
 
-	useEffect(() => {
-		setCookiesExits(Cookies.get(tokenCookie) && Cookies.get(userCookie));
-	}, [refresh]);
+	useEffect(() => {}, [isLogged]);
 
 	return (
 		<nav className="shadow bg-white">
@@ -45,7 +41,7 @@ function Navbar() {
 					<li className="hover:text-cyan-500 transition-colors">
 						<DynamicNextLink href="/portfolios">Portfolios</DynamicNextLink>
 					</li>
-					{cookiesExits ? (
+					{isLogged ? (
 						<>
 							<li>
 								<DynamicNextLink href="/dashboard">Dashboard</DynamicNextLink>

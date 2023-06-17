@@ -18,6 +18,7 @@ export default function Dashboard() {
 	const showData = () => {
 		if (loading) return <span>Loading...</span>;
 		if (error) return <span>{error}</span>;
+		
 		return <PortfoliosSection portfoliosList={data} />;
 	};
 

@@ -18,6 +18,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/services/portfolios.ts", "src/utils/object-to-formData.js", "src/context/customModal.jsx", "src/components/shared/CustomModal/index.tsx", "src/hooks/useCustomModal.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/services/portfolios.ts", "src/utils/object-to-formData.js", "src/context/customModal.jsx", "src/components/shared/CustomModal/index.tsx", "src/hooks/useCustomModal.tsx", "src/middleware.js"],
   "exclude": ["node_modules"]
 }

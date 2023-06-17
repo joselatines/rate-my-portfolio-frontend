@@ -5,6 +5,7 @@ import { AiFillEye } from "react-icons/ai";
 import { HiOutlineExternalLink } from "react-icons/hi";
 import DeletePortfolio from "@/components/Forms/Portfolio/DeletePortfolio";
 import RateCard from "./RateCard";
+import { parseImg } from "@/utils/parse-img";
 
 type IProps = {
 	title: string;
@@ -42,7 +43,7 @@ function PortfolioCard({
 				width={200}
 				height={100}
 				className="w-full bg-cover h-64"
-				src={thumbnail_path}
+				src={parseImg(thumbnail_path)}
 				alt={title}
 			/>
 			<section className="px-6 py-4">
