@@ -40,7 +40,7 @@ function PortfoliosSection({ portfoliosList }: IProps) {
 					portfolio={modalPortfolioData!}
 				/>
 			)}
-			<section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+			<section className="flex flex-wrap my-3 gap-10">
 				{portfoliosList.length > 0
 					? portfoliosList.map(
 							({
@@ -67,7 +67,7 @@ function PortfoliosSection({ portfoliosList }: IProps) {
 								/>
 							)
 					  )
-					: [1, 2, 3].map(n => <SkeletonPortfolioCard key={n} />)}
+					: [1, 2, 3, 4, 5, 6].map(n => <SkeletonPortfolioCard key={n} />)}
 			</section>
 		</>
 	);

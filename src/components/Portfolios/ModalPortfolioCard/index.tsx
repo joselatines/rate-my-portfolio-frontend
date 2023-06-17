@@ -4,6 +4,7 @@ import { AiFillCloseCircle, AiFillGithub } from "react-icons/ai";
 import { HiOutlineExternalLink } from "react-icons/hi";
 import { Portfolio } from "@/shared/interfaces/portfolio.interface";
 import { parseImg } from "@/utils/parse-img";
+import RateCard from "../PortfolioCard/RateCard";
 
 type IProps = {
 	portfolio: Portfolio;
@@ -11,6 +12,7 @@ type IProps = {
 };
 
 function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
+
 	const {
 		thumbnail_path,
 		title,
@@ -19,11 +21,9 @@ function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
 		author,
 		live,
 		technologies,
+		current_rate_avg,
+		id,
 	} = portfolio;
-
-	const ICONS: { [key: string]: JSX.Element } = {
-		github: <AiFillGithub size={25} />,
-	};
 
 	return (
 		<div
@@ -38,7 +38,7 @@ function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
 				<div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-10">
 					<div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all">
 						<div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-							<button onClick={closeModal} type="button" className="btn">
+							<button onClick={closeModal} type="button" className="btn danger">
 								Close <AiFillCloseCircle size={20} />
 							</button>
 						</div>
@@ -46,7 +46,7 @@ function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
 							<section className="col-span-2">
 								<div>
 									<NextImage
-										width={200}
+										width={500}
 										height={100}
 										className="w-full max-h-[60vh] bg-cover mb-5"
 										src={parseImg(thumbnail_path)}
@@ -56,12 +56,14 @@ function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
 								<div>{technologies.map(tech => tech)}</div>
 							</section>
 							<section className="min-w-full">
-								<h2 className="text-xl font-bold">{title}</h2>
+								<h2 className="text-5xl font-bold mb-3">{title}</h2>
 								<p>{description}</p>
-								<div>
-									<span>Votes: {current_votes}</span>
-									<span>Average: {current_votes / 2}</span>
-								</div>
+
+								<RateCard
+									portfolioId={id}
+									currentVotes={current_votes}
+									currentRateAvg={current_rate_avg}
+								/>
 								<div className="mt-6 flex justify-end items-center gap-1">
 									<NextLink href={live} target="_blank" className="btn">
 										See live

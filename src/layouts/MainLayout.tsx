@@ -7,12 +7,12 @@ type IProps = {
 };
 function MainLayout({ children }: IProps) {
 	return (
-		<main>
+		<>
 			<Toaster />
 			<Navbar />
-			{children}
-			<Footer />
-		</main>
+			<main className="py-6 px-8">{children}</main>
+			{/* 	<Footer /> */}
+		</>
 	);
 }
 

@@ -9,6 +9,7 @@ type IProps = {
 export default function Portfolios({ portfoliosList }: IProps) {
 	return (
 		<main>
+			<h1 className="text-6xl font-bold mb-3">Portfolios</h1>
 			<PortfoliosSection portfoliosList={portfoliosList} />
 		</main>
 	);

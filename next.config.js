@@ -9,7 +9,7 @@ const nextConfig = {
 			{
 				protocol: isDev ? "http" : "https",
 				hostname: NEXT_PUBLIC_HOSTNAME || "localhost",
-				port: NEXT_PUBLIC_PORT || "5000",
+				port: NEXT_PUBLIC_PORT || "",
 				pathname: "/**",
 			},
 		],

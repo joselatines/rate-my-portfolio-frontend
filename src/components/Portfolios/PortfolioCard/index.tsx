@@ -38,15 +38,15 @@ function PortfolioCard({
 	};
 
 	return (
-		<div className="max-w-lg min-w-sm rounded overflow-hidden shadow-lg ">
+		<div className="text-center md:text-left max-w-lg w-auto rounded overflow-hidden shadow-lg ">
 			<NextImage
-				width={200}
-				height={100}
-				className="w-full bg-cover h-64"
+				width={450}
+				height={300}
+				className="object-cover w-full h-64"
 				src={parseImg(thumbnail_path)}
 				alt={title}
 			/>
-			<section className="px-6 py-4">
+			<section className="py-6 px-8">
 				<div>
 					<div className="font-bold text-xl mb-2">{title}</div>
 					<p className="text-gray-700 text-base">{description}</p>
@@ -54,11 +54,11 @@ function PortfolioCard({
 						By: {authorName}
 					</span>
 				</div>
-				<div className="flex gap-2 justify-center items-center flex-wrap">
+				<div className="flex items-center justify-center gap-2 flex-wrap md:justify-normal">
 					<button className="btn" onClick={handleCloseModal}>
 						More detail <AiFillEye />
 					</button>
-					<NextLink target="_blank" className="btn mx-2" href={live}>
+					<NextLink target="_blank" className="btn" href={live}>
 						See live app <HiOutlineExternalLink />
 					</NextLink>
 

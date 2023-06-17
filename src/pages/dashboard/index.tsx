@@ -18,13 +18,13 @@ export default function Dashboard() {
 	const showData = () => {
 		if (loading) return <span>Loading...</span>;
 		if (error) return <span>{error}</span>;
-		
+
 		return <PortfoliosSection portfoliosList={data} />;
 	};
 
 	return (
 		<div>
-			<span>Dashboard private</span>
+			<h1 className="text-6xl font-bold mb-3">Dashboard</h1>
 			<CreatePortfolioForm />
 			{showData()}
 		</div>
