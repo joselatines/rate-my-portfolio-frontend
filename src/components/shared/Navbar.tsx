@@ -19,9 +19,12 @@ function Navbar() {
 	const { isLogged, logout, login } = useContextUser();
 
 	const handleLogout = async () => {
+		const tokenName =
+			process.env.NEXT_PUBLIC_COOKIE_TOKEN_NAME || "access_token";
 		const res = await apiLogout();
 		if (toastCheckApiResponse(res)) {
 			router.push("/");
+			Cookies.remove(tokenName);
 			logout();
 		}
 	};
