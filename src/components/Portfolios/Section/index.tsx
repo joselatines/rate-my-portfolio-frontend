@@ -27,7 +27,7 @@ function PortfoliosSection({ portfoliosList }: IProps) {
 	const handleCloseModal = () => {
 		setModalOpen(false);
 	};
-	console.log({ portfoliosList });
+
 	if (portfoliosList.length === 0) {
 		return <h1 className="text-3xl font-bod">No portfolios uploaded yet</h1>;
 	}
@@ -57,7 +57,7 @@ function PortfoliosSection({ portfoliosList }: IProps) {
 									key={id}
 									thumbnail_path={thumbnail_path}
 									title={title}
-									authorName={author.name}
+								
 									description={description}
 									id={id}
 									live={live}

@@ -1,9 +1,11 @@
+import Image from "next/image";
+
 function SkeletonPortfolioCard() {
 	return (
 		<div className="animate-pulse max-w-lg min-w-sm rounded overflow-hidden shadow-lg ">
-			<img
-				/* width={200}
-				height={100} */
+			<Image
+				width={200}
+				height={100}
 				className="w-full bg-cover h-64"
 				src=""
 				alt="loading"
