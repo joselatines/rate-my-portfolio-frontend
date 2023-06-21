@@ -11,7 +11,6 @@ type IProps = {
 	title: string;
 	description: string;
 	thumbnail_path: string;
-	authorName: string;
 	live: string;
 	openModal: (id: string) => any;
 	id: string;
@@ -23,7 +22,7 @@ function PortfolioCard({
 	title,
 	description,
 	thumbnail_path,
-	authorName,
+
 	currentRateAvg,
 	currentVotes,
 	openModal,
@@ -50,9 +49,6 @@ function PortfolioCard({
 				<div>
 					<div className="font-bold text-xl mb-2">{title}</div>
 					<p className="text-gray-700 text-base">{description}</p>
-					<span className="inline-block text-gray-500 text-sm font-semibold my-2">
-						By: {authorName}
-					</span>
 				</div>
 				<div className="flex items-center justify-center gap-2 flex-wrap md:justify-normal">
 					<button className="btn" onClick={handleCloseModal}>

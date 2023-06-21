@@ -6,6 +6,7 @@ import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
 import { AuthSignUp } from "@/shared/interfaces/auth.interface";
 import { useRouter } from "next/router";
 import { useContextUser } from "@/hooks/useContextUser";
+import Cookies from "js-cookie";
 
 const validationSchema = Yup.object({
 	password: Yup.string()
@@ -24,10 +25,15 @@ const initialValues = {
 function LoginForm() {
 	const router = useRouter();
 	const { login } = useContextUser();
-	
+
 	const handleSubmit = async (credentials: AuthSignUp) => {
+		const tokenName =
+			process.env.NEXT_PUBLIC_COOKIE_TOKEN_NAME || "access_token";
 		const res = await apiLogin(credentials);
+		
 		if (toastCheckApiResponse(res)) {
+			const { token } = res;
+			Cookies.set(tokenName, token);
 			router.push("/portfolios");
 			login();
 		}
