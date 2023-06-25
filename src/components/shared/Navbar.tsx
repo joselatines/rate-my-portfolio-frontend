@@ -9,6 +9,7 @@ import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
 import dynamic from "next/dynamic";
 import { useContextUser } from "@/hooks/useContextUser";
 import Image from "next/image";
+import { toast } from "react-hot-toast";
 
 const tokenCookie = "access_token";
 const userCookie = "user";
@@ -21,11 +22,14 @@ function Navbar() {
 	const handleLogout = async () => {
 		const tokenName =
 			process.env.NEXT_PUBLIC_COOKIE_TOKEN_NAME || "access_token";
-		const res = await apiLogout();
-		if (toastCheckApiResponse(res)) {
+		try {
+			const res = await apiLogout();
 			router.push("/");
 			Cookies.remove(tokenName);
 			logout();
+		} catch (error) {
+			console.error(error);
+			toast.error("Something went wrong");
 		}
 	};
 

@@ -7,6 +7,7 @@ import { AuthSignUp } from "@/shared/interfaces/auth.interface";
 import { useRouter } from "next/router";
 import { useContextUser } from "@/hooks/useContextUser";
 import Cookies from "js-cookie";
+import { toast } from "react-hot-toast";
 
 const validationSchema = Yup.object({
 	password: Yup.string()
@@ -29,13 +30,18 @@ function LoginForm() {
 	const handleSubmit = async (credentials: AuthSignUp) => {
 		const tokenName =
 			process.env.NEXT_PUBLIC_COOKIE_TOKEN_NAME || "access_token";
-		const res = await apiLogin(credentials);
-		
-		if (toastCheckApiResponse(res)) {
-			const { token } = res;
-			Cookies.set(tokenName, token);
+
+		try {
+			const res = await apiLogin(credentials);
+			const { data } = res;
+
+			Cookies.set(tokenName, data.token);
+			toast.success("Logged successfully");
 			router.push("/portfolios");
 			login();
+		} catch (error) {
+			console.error(error);
+			toast.error("Something went wrong");
 		}
 	};
 

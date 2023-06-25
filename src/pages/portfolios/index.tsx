@@ -17,7 +17,8 @@ export default function Portfolios({ portfoliosList }: IProps) {
 
 export async function getStaticProps() {
 	const portfoliosList = await getAllPortfolios();
-	console.log(portfoliosList)
+	console.log(portfoliosList);
+	console.log("portfoliosList");
 
 	return {
 		props: {

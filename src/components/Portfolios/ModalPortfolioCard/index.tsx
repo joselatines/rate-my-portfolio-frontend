@@ -12,13 +12,11 @@ type IProps = {
 };
 
 function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
-
 	const {
 		thumbnail_path,
 		title,
 		description,
 		current_votes,
-		author,
 		live,
 		technologies,
 		current_rate_avg,
