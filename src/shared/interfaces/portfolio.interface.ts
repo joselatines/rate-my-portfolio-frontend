@@ -29,6 +29,7 @@ export interface File {
 
 interface Author {
 	name: string;
+	email: string;
 }
 
 export interface CreatePortfolio {

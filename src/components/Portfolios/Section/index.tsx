@@ -57,7 +57,7 @@ function PortfoliosSection({ portfoliosList }: IProps) {
 									key={id}
 									thumbnail_path={thumbnail_path}
 									title={title}
-								
+									authorName={author.name}
 									description={description}
 									id={id}
 									live={live}
