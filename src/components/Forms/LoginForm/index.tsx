@@ -34,8 +34,10 @@ function LoginForm() {
 		try {
 			const res = await apiLogin(credentials);
 			const { data } = res;
-
+			console.log(data);
+			const user = JSON.stringify(data);
 			Cookies.set(tokenName, data.token);
+			Cookies.set("user", user);
 			toast.success("Logged successfully");
 			router.push("/portfolios");
 			login();
