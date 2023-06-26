@@ -7,7 +7,7 @@ function SkeletonPortfolioCard() {
 				width={200}
 				height={100}
 				className="w-full bg-cover h-64"
-				src=""
+				src="/public/loading.jpg"
 				alt="loading"
 			/>
 			<div className="px-6 py-4">

@@ -20,12 +20,11 @@ function Navbar() {
 	const { isLogged, logout, login } = useContextUser();
 
 	const handleLogout = async () => {
-		const tokenName =
-			process.env.NEXT_PUBLIC_COOKIE_TOKEN_NAME || "access_token";
+		const tokenName = "access_token";
 		try {
 			const res = await apiLogout();
 			router.push("/");
-			Cookies.remove(tokenName);
+			// Cookies.remove(tokenName);
 			logout();
 		} catch (error) {
 			console.error(error);

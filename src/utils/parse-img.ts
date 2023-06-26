@@ -1,3 +1,4 @@
 export const parseImg = (imagePath: string) => {
-	return `https://rate-my-portfolio.onrender.com/${imagePath}`;
+	const isDev = process.env.NODE_ENV === "development";
+	return `${isDev ? "http://localhost:5000/" : "rate-my-portfolio.onrender.com"}${imagePath}`;
 };
