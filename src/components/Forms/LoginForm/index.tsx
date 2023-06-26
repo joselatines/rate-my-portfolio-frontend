@@ -28,15 +28,13 @@ function LoginForm() {
 	const { login } = useContextUser();
 
 	const handleSubmit = async (credentials: AuthSignUp) => {
-		const tokenName = "access_token";
-
 		try {
 			const res = await apiLogin(credentials);
 			const { data } = res;
 			console.log(data);
 			const user = JSON.stringify(data);
-			/* Cookies.set(tokenName, data.token);
-			Cookies.set("user", user); */
+			Cookies.set("access_token", data.token);
+			Cookies.set("user", user);
 			toast.success("Logged successfully");
 			router.push("/portfolios");
 			login();
