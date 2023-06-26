@@ -54,7 +54,7 @@ export const newPortfolio = async (portfolio: CreatePortfolio) => {
 
 	try {
 		const res = await axios.request(options);
-		return res;
+		return res.data;
 	} catch (err) {
 		return errorApiReqHandler(err);
 	}

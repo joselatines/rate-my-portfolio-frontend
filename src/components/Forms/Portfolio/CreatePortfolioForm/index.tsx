@@ -34,7 +34,7 @@ function CreatePortfolioForm() {
 				const res = await newPortfolio(portfolioData);
 
 				if (res.status === 200) {
-					toast.success(res.data.message);
+					toast.success(res.message);
 					setOpenModal(false);
 					resetForm(initialValues);
 					router.push("/portfolios");
