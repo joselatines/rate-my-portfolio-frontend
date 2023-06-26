@@ -32,7 +32,7 @@ function LoginForm() {
 			const res = await apiLogin(credentials);
 			const { data } = res;
 			console.log(data);
-			const user = JSON.stringify(data);
+			const user = data;
 			Cookies.set("access_token", data.token);
 			Cookies.set("user", user);
 			toast.success("Logged successfully");
