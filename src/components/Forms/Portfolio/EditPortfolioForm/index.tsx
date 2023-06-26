@@ -37,7 +37,6 @@ function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
 		portfolioData: EditPortfolio,
 		{ resetForm }: any
 	) => {
-		console.log(portfolioData);
 		const res = await editPortfolio(portfolioData, portfolioId);
 
 		if (toastCheckApiResponse(res)) {

@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 
 export async function middleware(request) {
-	console.log("🚀💂 middleware");
+	console.info("🚀💂 middleware");
 
 	const jwt = await request.cookies.get("access_token")?.value;
 

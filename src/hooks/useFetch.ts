@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
+import axios from "axios";
 
 export interface DataState {
 	loading: boolean;
 	data: any;
-	error: string | null;
+	error: string | null | any;
 }
 
 export const useFetch = (url: string) => {
@@ -15,26 +16,19 @@ export const useFetch = (url: string) => {
 
 	const handleFetch = useCallback(async () => {
 		try {
-			const response = await fetch(url, {
-				credentials: "include",
-			});
-
-			if (!response.ok) throw new Error(response.statusText);
-
-			const dataApi = await response.json();
+			const response = await axios.get(url, { withCredentials: true });
 
 			setDataState(prev => ({
 				...prev,
 				loading: false,
-				data: dataApi.data,
+				data: response.data.data,
 			}));
-
-
 		} catch (error) {
+			console.error(error);
 			setDataState(prev => ({
 				...prev,
 				loading: false,
-				error: (error as Error).message,
+				error: error,
 			}));
 		}
 	}, []);

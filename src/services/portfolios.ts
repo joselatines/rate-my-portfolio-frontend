@@ -13,6 +13,12 @@ type GetPortfolios = () => Promise<Portfolio[]>;
 
 const NEXT_PUBLIC_API_URI = process.env.NEXT_PUBLIC_API_URI;
 
+// Axios request interceptor to include cookies with each request
+axios.interceptors.request.use((config) => {
+	config.withCredentials = true;
+	return config;
+});
+
 export const getAllPortfolios: GetPortfolios = async () => {
 	try {
 		const res = await axios.get(`${NEXT_PUBLIC_API_URI}/portfolios`);
@@ -25,7 +31,6 @@ export const getAllPortfolios: GetPortfolios = async () => {
 export const getAllUserPortfolios: GetPortfolios = async () => {
 	try {
 		const res = await axios.get(`${NEXT_PUBLIC_API_URI}/portfolios/all`);
-
 		return res.data.data;
 	} catch (err) {
 		return errorApiReqHandler(err);
@@ -33,34 +38,14 @@ export const getAllUserPortfolios: GetPortfolios = async () => {
 };
 
 export const newPortfolio = async (portfolio: CreatePortfolio) => {
-	console.log(portfolio);
 	const form = serialize({
 		...portfolio,
 		technologies: portfolio.technologies.join(","),
 	});
-	console.log(portfolio.technologies.join(","));
+
 	const options = {
 		method: "POST",
 		url: `${NEXT_PUBLIC_API_URI}/portfolios`,
-		withCredentials: true,
-		headers: {
-			"Content-Type": `multipart/form-data;`,
-		},
-		data: form,
-	};
-
-	const res = await axios.request(options);
-
-	return res;
-};
-
-export const editPortfolio = async (portfolio: EditPortfolio, id: string) => {
-	// todo not refresh image if is empty
-	const form = objectToFormData(portfolio);
-	const options = {
-		method: "PUT",
-		url: `${NEXT_PUBLIC_API_URI}/portfolios/${id}`,
-		withCredentials: true,
 		headers: {
 			"Content-Type": `multipart/form-data;`,
 		},
@@ -69,7 +54,25 @@ export const editPortfolio = async (portfolio: EditPortfolio, id: string) => {
 
 	try {
 		const res = await axios.request(options);
+		return res;
+	} catch (err) {
+		return errorApiReqHandler(err);
+	}
+};
 
+export const editPortfolio = async (portfolio: EditPortfolio, id: string) => {
+	const form = objectToFormData(portfolio);
+	const options = {
+		method: "PUT",
+		url: `${NEXT_PUBLIC_API_URI}/portfolios/${id}`,
+		headers: {
+			"Content-Type": `multipart/form-data;`,
+		},
+		data: form,
+	};
+
+	try {
+		const res = await axios.request(options);
 		return res.data;
 	} catch (err) {
 		return errorApiReqHandler(err);
@@ -83,13 +86,11 @@ export const ratePortfolio = async (
 	const options = {
 		method: "POST",
 		url: `${NEXT_PUBLIC_API_URI}/portfolios/${portfolioId}/rate`,
-		withCredentials: true,
 		data: rateOptions,
 	};
 
 	try {
 		const res = await axios.request(options);
-
 		return res.data;
 	} catch (err) {
 		return { error: "You need to login" };
@@ -100,12 +101,10 @@ export const deletePortfolio = async (id: string) => {
 	const options = {
 		method: "DELETE",
 		url: `${NEXT_PUBLIC_API_URI}/portfolios/${id}`,
-		withCredentials: true,
 	};
 
 	try {
 		const res = await axios.request(options);
-
 		return res.data;
 	} catch (err) {
 		return errorApiReqHandler(err);
