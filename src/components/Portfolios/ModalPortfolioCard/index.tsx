@@ -61,6 +61,7 @@ function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
 									portfolioId={id}
 									currentVotes={current_votes}
 									currentRateAvg={current_rate_avg}
+									closeModal={closeModal}
 								/>
 								<div className="mt-6 flex justify-end items-center gap-1">
 									<NextLink href={live} target="_blank" className="btn">

@@ -7,12 +7,14 @@ interface RateCardProps {
 	currentVotes: number;
 	currentRateAvg: number;
 	portfolioId: string;
+	closeModal: () => void;
 }
 
 const RateCard: React.FC<RateCardProps> = ({
 	portfolioId,
 	currentRateAvg,
 	currentVotes,
+	closeModal,
 }) => {
 	const [rateNumber, setRateNumber] = useState(0);
 	const [refresh, setRefresh] = useState(0);
@@ -30,16 +32,19 @@ const RateCard: React.FC<RateCardProps> = ({
 		if (toastCheckApiResponse(res)) {
 			router.push("/portfolios");
 			setRefresh(prev => prev + 1);
+			closeModal && closeModal();
 		}
 	};
 
-	useEffect(() => {}, [refresh]);
+	useEffect(() => {
+		console.log(refresh, "component renders");
+	}, [refresh]);
 
 	return (
 		<div className="p-3 mt-3 w-full">
 			<div className="grid">
 				<span>
-					Votes avg:{" "}
+					Votes average:{" "}
 					<span
 						className={`${
 							currentRateAvg > 5 ? "text-green-500" : "text-red-500"
