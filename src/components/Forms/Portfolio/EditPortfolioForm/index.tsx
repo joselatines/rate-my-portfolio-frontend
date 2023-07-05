@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import NextImage from "next/image";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import { AiFillEdit } from "react-icons/ai";
@@ -14,11 +13,7 @@ import {
 	Portfolio,
 } from "@/shared/interfaces/portfolio.interface";
 import FileUpload from "@/components/FileUpload";
-import {
-	inputsList,
-	validationSchema,
-	initialValues as defaultInitialValues,
-} from "../config";
+import { inputsList, editInitialValues } from "../config";
 import Loader from "@/components/shared/Loader";
 
 type EditPortfolioFormProps = {
@@ -27,38 +22,40 @@ type EditPortfolioFormProps = {
 
 const EditPortfolioForm: React.FC<EditPortfolioFormProps> = ({ id }) => {
 	const [openModal, setOpenModal] = useState(false);
-	const [initialValues, setInitialValues] = useState<any>(defaultInitialValues);
+	const [portfolio, setPortfolio] = useState<Portfolio | any>(null);
+	const [loading, setLoading] = useState(true);
+
 	const router = useRouter();
 
 	const getCurrentPortfolioValues = async (id: string) => {
-		const portfolio = await getOnePortfolio(id);
-		setInitialValues(portfolio);
+		const response = await getOnePortfolio(id);
+		const data = response.data;
+
+		if (response.success) {
+			setPortfolio(data);
+		}
+		setLoading(false);
 	};
 
 	useEffect(() => {
 		getCurrentPortfolioValues(id);
-	}, []);
+	}, [id]);
 
-	const handleSubmit = async (
-		portfolioData: EditPortfolio,
-		{ resetForm }: any
-	) => {
-		const res = await editPortfolio(portfolioData, id);
+	const formik = useFormik<EditPortfolio>({
+		initialValues: portfolio || editInitialValues,
+		onSubmit: async values => {
+			const response = await editPortfolio(values, id);
 
-		if (toastCheckApiResponse(res)) {
-			setOpenModal(false);
-			resetForm(initialValues);
-			router.push("/dashboard");
-		}
-	};
-
-	const formik = useFormik({
-		validationSchema,
-		initialValues,
-		onSubmit: handleSubmit,
+			if (toastCheckApiResponse(response)) {
+				setOpenModal(false);
+				router.push("/portfolios");
+			}
+		},
 	});
 
-	if (!initialValues) return <Loader />;
+	if (loading) {
+		return <Loader />;
+	}
 
 	return (
 		<CustomModal
@@ -77,32 +74,23 @@ const EditPortfolioForm: React.FC<EditPortfolioFormProps> = ({ id }) => {
 				</h1>
 
 				{inputsList.map(input => (
-					<CustomTextInput key={input.name} formik={formik} {...input} />
+					<CustomTextInput key={input.name} {...input} formik={formik} />
 				))}
 
 				<CustomTextarea
-					formik={formik}
 					name="description"
 					placeholder="My first portfolio..."
 					label="Description"
+					formik={formik}
 				/>
 
 				<TechnologiesCheckboxes formik={formik} arrayName="technologies" />
-				{initialValues.technologies?.map((tech: string) => (
-					<span key={tech}>{tech}</span>
-				))}
-				<NextImage
-					src={initialValues.thumbnail_path}
-					alt={initialValues.title}
-					width={100}
-					height={100}
-				/>
+
 				<FileUpload formik={formik} />
+
 				<div className="text-center">
 					<button
-						className={`bg-blue-500 rounded p-3 text-white ${
-							formik.isSubmitting && "disabled"
-						}`}
+						className="bg-blue-500 rounded p-3 text-white"
 						type="submit"
 						disabled={formik.isSubmitting}
 					>

@@ -1,11 +1,38 @@
 type IProps = {
-	formik: any;
+	formik?: any;
 	placeholder: string;
 	name: string;
 	label: string;
+	onChange?: (e: any) => any;
+
 };
 
-function CustomTextarea({ formik, name, label, placeholder }: IProps) {
+function CustomTextarea({
+	formik,
+	name,
+	label,
+	placeholder,
+	onChange,
+}: IProps) {
+	if (!formik)
+		return (
+			<div className="mb-4">
+				<div className="mb-4">
+					<label
+						className="block text-gray-700 text-sm font-bold mb-2"
+						htmlFor={name}
+					>
+						{label}
+					</label>
+					<textarea
+						className={`resize-y shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline `}
+						name={name}
+						id={name}
+						onChange={onChange}
+					/>
+				</div>
+			</div>
+		);
 	return (
 		<div className="mb-4">
 			<div className="mb-4">

@@ -22,6 +22,13 @@ export const initialValues = {
 	},
 };
 
+export const editInitialValues = {
+	title: "",
+	description: "",
+	live: "",
+	technologies: [],
+};
+
 export const inputsList = [
 	{ label: "Title", name: "title", placeholder: "My first portfolio" },
 	{

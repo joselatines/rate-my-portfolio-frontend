@@ -7,7 +7,7 @@ export interface Portfolio {
 	current_votes: number;
 	current_rate_avg: number;
 	author: Author;
-	thumbnail_path: string;
+	thumbnail_path: string | any;
 }
 
 interface Image {

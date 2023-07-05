@@ -67,6 +67,7 @@ function PortfolioCard({
 						portfolioId={id}
 						currentVotes={currentVotes}
 						currentRateAvg={currentRateAvg}
+						closeModal={handleCloseModal}
 					/>
 
 					{router.pathname.includes(dashboardPath) && (

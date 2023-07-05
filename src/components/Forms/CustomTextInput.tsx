@@ -1,11 +1,40 @@
 type IProps = {
-	formik: any;
+	formik?: any;
 	placeholder: string;
 	name: string;
 	label: string;
+	onChange?: (e: any) => any;
 };
 
-function CustomTextInput({ formik, name, label, placeholder }: IProps) {
+function CustomTextInput({
+	formik,
+	name,
+	label,
+	placeholder,
+	onChange,
+}: IProps) {
+	if (!formik)
+		return (
+			<div className="mb-4">
+				<div className="mb-4">
+					<label
+						className="block text-gray-700 text-sm font-bold mb-2"
+						htmlFor={name}
+					>
+						{label}
+					</label>
+					<input
+						className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+						type="text"
+						name={name}
+						id={name}
+						placeholder={placeholder}
+						onChange={onChange}
+					/>
+				</div>
+			</div>
+		);
+
 	return (
 		<div className="mb-4">
 			<div className="mb-4">

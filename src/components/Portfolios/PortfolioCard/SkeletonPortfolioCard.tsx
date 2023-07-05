@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 function SkeletonPortfolioCard() {
 	return (
 		<div className="animate-pulse max-w-lg min-w-sm rounded overflow-hidden shadow-lg ">

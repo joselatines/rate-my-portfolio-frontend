@@ -74,18 +74,11 @@ export const newPortfolio = async (portfolio: CreatePortfolio) => {
 };
 
 export const editPortfolio = async (portfolio: EditPortfolio, id: string) => {
-	const form = objectToFormData(portfolio);
-	const options = {
-		method: "PUT",
-		url: `${NEXT_PUBLIC_API_URI}/portfolios/${id}`,
-		headers: {
-			"Content-Type": `multipart/form-data;`,
-		},
-		data: form,
-	};
-
 	try {
-		const res = await axios.request(options);
+		const res = await axios.put(
+			`${NEXT_PUBLIC_API_URI}/portfolios/${id}`,
+			portfolio
+		);
 		return res.data;
 	} catch (err) {
 		return errorApiReqHandler(err);
