@@ -6,6 +6,7 @@ import { HiOutlineExternalLink } from "react-icons/hi";
 import DeletePortfolio from "@/components/Forms/Portfolio/DeletePortfolio";
 import RateCard from "./RateCard";
 import { parseImg } from "@/utils/parse-img";
+import EditPortfolioForm from "@/components/Forms/Portfolio/EditPortfolioForm";
 
 type IProps = {
 	title: string;
@@ -71,6 +72,7 @@ function PortfolioCard({
 					{router.pathname.includes(dashboardPath) && (
 						<>
 							<DeletePortfolio id={id} />
+							<EditPortfolioForm id={id} />
 						</>
 					)}
 				</div>

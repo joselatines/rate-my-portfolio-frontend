@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NextImage from "next/image";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
@@ -6,38 +6,44 @@ import { AiFillEdit } from "react-icons/ai";
 import CustomModal from "@/components/shared/CustomModal";
 import CustomTextInput from "../../CustomTextInput";
 import CustomTextarea from "../../CustomTextarea";
-import { editPortfolio } from "@/services/portfolios";
+import { editPortfolio, getOnePortfolio } from "@/services/portfolios";
 import TechnologiesCheckboxes from "../../TechnologiesCheckboxes";
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
-import { EditPortfolio } from "@/shared/interfaces/portfolio.interface";
+import {
+	EditPortfolio,
+	Portfolio,
+} from "@/shared/interfaces/portfolio.interface";
 import FileUpload from "@/components/FileUpload";
-import { inputsList, validationSchema } from "../config";
+import {
+	inputsList,
+	validationSchema,
+	initialValues as defaultInitialValues,
+} from "../config";
+import Loader from "@/components/shared/Loader";
 
-type IProps = {
-	portfolioId: string;
-	currentValues: EditPortfolio;
+type EditPortfolioFormProps = {
+	id: string;
 };
 
-function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
+const EditPortfolioForm: React.FC<EditPortfolioFormProps> = ({ id }) => {
 	const [openModal, setOpenModal] = useState(false);
+	const [initialValues, setInitialValues] = useState<any>(defaultInitialValues);
 	const router = useRouter();
 
-	const initialValues = {
-		...currentValues,
-		thumbnail_path: {
-			webkitRelativePath: "",
-			type: "",
-			size: 0,
-			name: "",
-			lastModifiedDate: 0,
-		},
+	const getCurrentPortfolioValues = async (id: string) => {
+		const portfolio = await getOnePortfolio(id);
+		setInitialValues(portfolio);
 	};
+
+	useEffect(() => {
+		getCurrentPortfolioValues(id);
+	}, []);
 
 	const handleSubmit = async (
 		portfolioData: EditPortfolio,
 		{ resetForm }: any
 	) => {
-		const res = await editPortfolio(portfolioData, portfolioId);
+		const res = await editPortfolio(portfolioData, id);
 
 		if (toastCheckApiResponse(res)) {
 			setOpenModal(false);
@@ -51,6 +57,8 @@ function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
 		initialValues,
 		onSubmit: handleSubmit,
 	});
+
+	if (!initialValues) return <Loader />;
 
 	return (
 		<CustomModal
@@ -80,12 +88,12 @@ function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
 				/>
 
 				<TechnologiesCheckboxes formik={formik} arrayName="technologies" />
-				{currentValues.technologies?.map(tech => (
+				{initialValues.technologies?.map((tech: string) => (
 					<span key={tech}>{tech}</span>
 				))}
 				<NextImage
-					src={currentValues.prevImage || ""}
-					alt={currentValues.title || ""}
+					src={initialValues.thumbnail_path}
+					alt={initialValues.title}
 					width={100}
 					height={100}
 				/>
@@ -104,6 +112,6 @@ function EditPortfolioForm({ portfolioId, currentValues }: IProps) {
 			</form>
 		</CustomModal>
 	);
-}
+};
 
 export default EditPortfolioForm;
