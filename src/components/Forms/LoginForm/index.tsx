@@ -12,7 +12,7 @@ import { toast } from "react-hot-toast";
 const validationSchema = Yup.object({
 	password: Yup.string()
 		.label("Password is required")
-		.min(8, "password must be 8 characters min")
+		.min(2, "password must be 2 characters min")
 		.required(),
 	email: Yup.string().label("Email is required").email().required(),
 });
@@ -32,6 +32,7 @@ function LoginForm() {
 			const res = await apiLogin(credentials);
 			const { data } = res;
 			const user = JSON.stringify(data);
+
 			Cookies.set("access_token", data.token);
 			Cookies.set("user", user);
 			toast.success("Logged successfully");
@@ -55,9 +56,7 @@ function LoginForm() {
 				<div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
 					<div className="max-w-md mx-auto">
 						<div>
-							<h1 className="text-2xl font-semibold">
-								Login Form with Floating Labels
-							</h1>
+							<h1 className="text-2xl font-semibold">Login Form</h1>
 						</div>
 						<div className="divide-y divide-gray-200">
 							<form

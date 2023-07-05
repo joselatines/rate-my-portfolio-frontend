@@ -1,11 +1,12 @@
+import { IServiceResponse } from "@/services/service-response.interface";
 import { toast } from "react-hot-toast";
 
-export function toastCheckApiResponse(apiDataResponse: any) {
-	if (apiDataResponse.error) {
-		toast.error(apiDataResponse.error);
+export function toastCheckApiResponse(response: IServiceResponse<any>) {
+	if (!response.success) {
+		toast.error(response.data?.message || response.message);
 		return false;
 	}
 
-	toast.success(apiDataResponse.message);
+	toast.success(response.data?.message || response.message);
 	return true;
 }

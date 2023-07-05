@@ -1,4 +1,4 @@
 export function errorApiReqHandler(error: any) {
 	console.error("⚠️: ", error);
-	return { error: error, message: error.message };
+	return { success: false, message: error.message };
 }

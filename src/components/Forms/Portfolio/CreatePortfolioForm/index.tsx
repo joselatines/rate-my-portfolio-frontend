@@ -30,18 +30,12 @@ function CreatePortfolioForm() {
 		const technologiesArray = portfolioData.technologies;
 
 		if (checkImageAndTechFields(imageFile, technologiesArray)) {
-			try {
-				const res = await newPortfolio(portfolioData);
+			const res = await newPortfolio(portfolioData);
 
-				if (res.status === 200) {
-					toast.success(res.message);
-					setOpenModal(false);
-					resetForm(initialValues);
-					router.push("/portfolios");
-				}
-			} catch (error: any) {
-				console.error(error);
-				toast.error(error.message);
+			if (toastCheckApiResponse(res)) {
+				setOpenModal(false);
+				resetForm(initialValues);
+				router.push("/portfolios");
 			}
 		}
 	};

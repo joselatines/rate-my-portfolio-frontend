@@ -3,24 +3,24 @@ import { getAllPortfolios } from "@/services/portfolios";
 import { Portfolio } from "@/shared/interfaces/portfolio.interface";
 
 type IProps = {
-	portfoliosList: Portfolio[];
+	portfolios: Portfolio[];
 };
 
-export default function Portfolios({ portfoliosList }: IProps) {
+export default function Portfolios({ portfolios }: IProps) {
 	return (
 		<main>
 			<h1 className="text-6xl font-bold mb-3">Portfolios</h1>
-			<PortfoliosSection portfoliosList={portfoliosList} />
+			<PortfoliosSection portfoliosList={portfolios} />
 		</main>
 	);
 }
 
 export async function getStaticProps() {
-	const portfoliosList = await getAllPortfolios();
+	const portfolios = await getAllPortfolios();
 
 	return {
 		props: {
-			portfoliosList,
+			portfolios: portfolios.data || [],
 		},
 	};
 }

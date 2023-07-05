@@ -42,9 +42,7 @@ function SignUpForm() {
 				<div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
 					<div className="max-w-md mx-auto">
 						<div>
-							<h1 className="text-2xl font-semibold">
-								Login Form with Floating Labels
-							</h1>
+							<h1 className="text-2xl font-semibold">Sign Up Form</h1>
 						</div>
 						<div className="divide-y divide-gray-200">
 							<form
@@ -74,11 +72,11 @@ function SignUpForm() {
 
 								<div className="relative">
 									<button
-									type="submit"
+										type="submit"
 										disabled={formik.isSubmitting}
 										className={`btn ${formik.isSubmitting && "disabled"}`}
 									>
-										Login
+										Sign Up
 									</button>
 								</div>
 							</form>
