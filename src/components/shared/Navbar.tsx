@@ -22,12 +22,13 @@ function Navbar() {
 	const handleLogout = async () => {
 		try {
 			const res = await apiLogout();
-			router.push("/");
-			Cookies.remove("access_token");
-			logout();
+			if (toastCheckApiResponse(res)) {
+				router.push("/");
+				Cookies.remove("access_token");
+				logout();
+			}
 		} catch (error) {
 			console.error(error);
-			toast.error("Something went wrong");
 		}
 	};
 

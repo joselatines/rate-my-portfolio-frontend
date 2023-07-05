@@ -51,7 +51,16 @@ function ModalPortfolioCard({ closeModal, portfolio }: IProps) {
 										alt={title}
 									/>
 								</div>
-								<div>{technologies.map(tech => tech)}</div>
+								<section>
+									{technologies.map(tech => (
+										<span
+											key={tech}
+											className="text-primary px-3 bg-blue-500 text-white py-2 font-semibold "
+										>
+											{tech}
+										</span>
+									))}
+								</section>
 							</section>
 							<section className="min-w-full">
 								<h2 className="text-5xl font-bold mb-3">{title}</h2>
