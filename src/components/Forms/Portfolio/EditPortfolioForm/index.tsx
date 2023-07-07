@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
-import { AiFillEdit } from "react-icons/ai";
+
 import CustomModal from "@/components/shared/CustomModal";
 import CustomTextInput from "../../CustomTextInput";
 import CustomTextarea from "../../CustomTextarea";
@@ -21,7 +21,6 @@ type EditPortfolioFormProps = {
 };
 
 const EditPortfolioForm: React.FC<EditPortfolioFormProps> = ({ id }) => {
-	const [openModal, setOpenModal] = useState(false);
 	const [portfolio, setPortfolio] = useState<Portfolio | any>(null);
 	const [loading, setLoading] = useState(true);
 
@@ -47,7 +46,6 @@ const EditPortfolioForm: React.FC<EditPortfolioFormProps> = ({ id }) => {
 			const response = await editPortfolio(values, id);
 
 			if (toastCheckApiResponse(response)) {
-				setOpenModal(false);
 				router.push("/portfolios");
 			}
 		},
@@ -58,47 +56,38 @@ const EditPortfolioForm: React.FC<EditPortfolioFormProps> = ({ id }) => {
 	}
 
 	return (
-		<CustomModal
-			open={openModal}
-			setOpen={setOpenModal}
-			message="Edit portfolio"
-			icon={<AiFillEdit />}
+		<form
+			onSubmit={formik.handleSubmit}
+			className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-[60vw]"
+			encType="multipart/form-data"
 		>
-			<form
-				onSubmit={formik.handleSubmit}
-				className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-[60vw]"
-				encType="multipart/form-data"
-			>
-				<h1 className="text-3xl font-bold mb-3 text-center">
-					Edit a portfolio
-				</h1>
+			<h1 className="text-3xl font-bold mb-3 text-center">Edit a portfolio</h1>
 
-				{inputsList.map(input => (
-					<CustomTextInput key={input.name} {...input} formik={formik} />
-				))}
+			{inputsList.map(input => (
+				<CustomTextInput key={input.name} {...input} formik={formik} />
+			))}
 
-				<CustomTextarea
-					name="description"
-					placeholder="My first portfolio..."
-					label="Description"
-					formik={formik}
-				/>
+			<CustomTextarea
+				name="description"
+				placeholder="My first portfolio..."
+				label="Description"
+				formik={formik}
+			/>
 
-				<TechnologiesCheckboxes formik={formik} arrayName="technologies" />
+			<TechnologiesCheckboxes formik={formik} arrayName="technologies" />
 
-				<FileUpload formik={formik} />
+			<FileUpload formik={formik} />
 
-				<div className="text-center">
-					<button
-						className="bg-blue-500 rounded p-3 text-white"
-						type="submit"
-						disabled={formik.isSubmitting}
-					>
-						Edit portfolio
-					</button>
-				</div>
-			</form>
-		</CustomModal>
+			<div className="text-center">
+				<button
+					className="bg-blue-500 rounded p-3 text-white"
+					type="submit"
+					disabled={formik.isSubmitting}
+				>
+					Edit portfolio
+				</button>
+			</div>
+		</form>
 	);
 };
 

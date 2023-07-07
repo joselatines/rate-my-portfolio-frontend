@@ -2,12 +2,12 @@ import NextImage from "next/image";
 import NextLink from "next/link";
 import { AiFillCloseCircle, AiFillGithub } from "react-icons/ai";
 import { HiOutlineExternalLink } from "react-icons/hi";
-import { Portfolio } from "@/shared/interfaces/portfolio.interface";
+import IPortfolio from "@/shared/interfaces/portfolio.interface";
 import { parseImg } from "@/utils/parse-img";
 import RateCard from "../PortfolioCard/RateCard";
 
 type IProps = {
-	portfolio: Portfolio;
+	portfolio: Required<IPortfolio>;
 	closeModal: () => any;
 };
 

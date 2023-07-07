@@ -10,6 +10,19 @@ export interface Portfolio {
 	thumbnail_path: string | any;
 }
 
+export default interface IPortfolio {
+	current_votes?: number;
+	current_rate_avg?: number;
+	id?: string;
+	title: string;
+	description: string;
+	thumbnail_path: string;
+	technologies: string[];
+	created_by: string;
+	live: string;
+}
+
+
 interface Image {
 	name: string;
 }

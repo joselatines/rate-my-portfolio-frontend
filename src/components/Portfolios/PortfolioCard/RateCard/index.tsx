@@ -7,14 +7,12 @@ interface RateCardProps {
 	currentVotes: number;
 	currentRateAvg: number;
 	portfolioId: string;
-	closeModal: () => void;
 }
 
 const RateCard: React.FC<RateCardProps> = ({
 	portfolioId,
 	currentRateAvg,
 	currentVotes,
-	closeModal,
 }) => {
 	const [rateNumber, setRateNumber] = useState(0);
 	const [refresh, setRefresh] = useState(0);
@@ -30,9 +28,8 @@ const RateCard: React.FC<RateCardProps> = ({
 			feedback: "",
 		});
 		if (toastCheckApiResponse(res)) {
-			router.push("/portfolios");
+			// router.push("/portfolios");
 			setRefresh(prev => prev + 1);
-			closeModal && closeModal();
 		}
 	};
 

@@ -1,48 +1,36 @@
 import NextLink from "next/link";
 import NextImage from "next/image";
 import { useRouter } from "next/router";
-import { AiFillEye } from "react-icons/ai";
+import { AiFillEdit } from "react-icons/ai";
 import { HiOutlineExternalLink } from "react-icons/hi";
 import DeletePortfolio from "@/components/Forms/Portfolio/DeletePortfolio";
 import RateCard from "./RateCard";
 import { parseImg } from "@/utils/parse-img";
-import EditPortfolioForm from "@/components/Forms/Portfolio/EditPortfolioForm";
+import IPortfolio from "@/shared/interfaces/portfolio.interface";
+import GlassmorphismContainer from "@/components/Glassmorphism/GlassmorphismContainer";
 
 type IProps = {
-	title: string;
-	description: string;
-	thumbnail_path: string;
-	authorName: string;
-	live: string;
-	openModal: (id: string) => any;
-	id: string;
-	currentRateAvg: number;
-	currentVotes: number;
+	portfolio: Required<IPortfolio> | any;
 };
 
-function PortfolioCard({
-	title,
-	description,
-	thumbnail_path,
-	authorName,
-	currentRateAvg,
-	currentVotes,
-	openModal,
-
-	live,
-	id,
-}: IProps) {
+function PortfolioCard({ portfolio }: IProps) {
+	const {
+		title,
+		description,
+		thumbnail_path,
+		current_rate_avg,
+		current_votes,
+		live,
+		id,
+	} = portfolio;
 	const router = useRouter();
 	const dashboardPath = "/dashboard";
-	const handleCloseModal = () => {
-		openModal(id);
-	};
 
 	return (
 		<div className="text-center md:text-left max-w-lg w-auto rounded overflow-hidden shadow-lg ">
 			<NextImage
-				width={450}
-				height={300}
+				width={350}
+				height={200}
 				className="object-cover w-full h-64"
 				src={parseImg(thumbnail_path)}
 				alt={title}
@@ -52,28 +40,27 @@ function PortfolioCard({
 					<div className="font-bold text-xl mb-2">{title}</div>
 					<p className="text-gray-700 text-base">{description}</p>
 					<span className="inline-block text-gray-500 text-sm font-semibold my-2">
-						By: {authorName}
+						By: {"authorName"}
 					</span>
 				</div>
 				<div className="flex items-center justify-center gap-2 flex-wrap md:justify-normal">
-					<button className="btn" onClick={handleCloseModal}>
-						More detail <AiFillEye />
-					</button>
 					<NextLink target="_blank" className="btn" href={live}>
 						See live app <HiOutlineExternalLink />
 					</NextLink>
 
 					<RateCard
 						portfolioId={id}
-						currentVotes={currentVotes}
-						currentRateAvg={currentRateAvg}
-						closeModal={handleCloseModal}
+						currentVotes={current_votes}
+						currentRateAvg={current_rate_avg}
 					/>
 
 					{router.pathname.includes(dashboardPath) && (
 						<>
+							<NextLink className="btn" href={`/dashboard/portfolios/${id}`}>
+								Edit <AiFillEdit />
+							</NextLink>
+
 							<DeletePortfolio id={id} />
-							<EditPortfolioForm id={id} />
 						</>
 					)}
 				</div>

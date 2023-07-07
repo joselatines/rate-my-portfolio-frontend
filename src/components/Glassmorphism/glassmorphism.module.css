@@ -1,0 +1,79 @@
+.glassmorphism {
+	box-shadow: 0 8px 30px 0 rgba(31, 38, 135, 0.37);
+	z-index: -10;
+	/* backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px); */
+
+	background: linear-gradient(
+		108.46deg,
+		rgba(255, 255, 255, 0.264) 0%,
+		rgba(255, 255, 255, 0.066) 100%
+	);
+	border-radius: 20px;
+	width: auto;
+	height: auto;
+}
+
+.glassmorphismCircle {
+	/* backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px); */
+
+	background: linear-gradient(
+		108.46deg,
+		rgba(255, 255, 255, 0.264) 0%,
+		rgba(255, 255, 255, 0.066) 100%
+	);
+	width: auto;
+	height: auto;
+}
+
+.glassmorphismNotRounded {
+	box-shadow: 0 8px 30px 0 rgba(31, 38, 135, 0.37);
+	/* backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px); */
+
+	background: linear-gradient(
+		108.46deg,
+		rgba(255, 255, 255, 0.264) 0%,
+		rgba(255, 255, 255, 0.066) 100%
+	);
+	width: auto;
+	height: auto;
+}
+
+.glassmorphismNav {
+	box-shadow: 0 8px 30px 0 rgba(31, 38, 135, 0.2);
+	backdrop-filter: blur(10px);
+	background: linear-gradient(
+		108.46deg,
+		rgba(255, 255, 255, 0.264) 0%,
+		rgba(255, 255, 255, 0.066) 100%
+	);
+}
+
+.glassmorphismCircle {
+	/* backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px); */
+
+	background: linear-gradient(
+		108.46deg,
+		rgba(255, 255, 255, 0.264) 0%,
+		rgba(255, 255, 255, 0.066) 100%
+	);
+	width: auto;
+	height: auto;
+}
+
+.glassmorphismInput {
+	border: none;
+	background: rgba(255, 255, 255, 0.05);
+	/* backdrop-filter: blur(10px); */
+	border-top: 1px solid rgba(255, 255, 255, 0.2);
+	border-left: 1px solid rgba(255, 255, 255, 0.2);
+	box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+	color: rgb(255, 255, 255);
+	transition: color 0.3s ease-out;
+	width: auto;
+	min-width: 2rem;
+	border-radius: 5px;
+}
