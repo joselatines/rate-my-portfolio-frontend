@@ -31,7 +31,7 @@ function CreatePortfolioForm() {
 
 		if (checkImageAndTechFields(imageFile, technologiesArray)) {
 			const res = await newPortfolio(portfolioData);
-
+	
 			if (toastCheckApiResponse(res)) {
 				setOpenModal(false);
 				resetForm(initialValues);

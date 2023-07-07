@@ -42,7 +42,7 @@ export const getAllPortfolios: GetPortfolios = async () => {
 
 export const getAllPortfoliosFromUser: GetPortfolios = async () => {
 	try {
-		const res = await axios.get(`${NEXT_PUBLIC_API_URI}/portfolios/all`);
+		const res = await axios.get(`${NEXT_PUBLIC_API_URI}/portfolios/user`);
 
 		return res.data;
 	} catch (err) {

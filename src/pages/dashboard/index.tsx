@@ -8,7 +8,9 @@ export default function DashboardPage() {
 	const [portfolios, setPortfolios] = useState<Portfolio[] | any>([]);
 	const fetchData = async () => {
 		const res = await getAllPortfoliosFromUser();
-		if (res.success) return setPortfolios(res.data);
+		if (res.success) {
+			return setPortfolios(res.data);
+		}
 	};
 	useEffect(() => {
 		fetchData();

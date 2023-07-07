@@ -8,11 +8,11 @@ function DeletePortfolio({ id }: { id: string }) {
 
 	const handleClick = async () => {
 		const res = await deletePortfolio(id);
-		if (toastCheckApiResponse(res)) router.push("/dashboard");
+		if (toastCheckApiResponse(res)) router.push("/portfolios");
 	};
 	return (
 		<button className="btn danger" onClick={handleClick}>
-			DeletePortfolio
+			Delete
 		</button>
 	);
 }
