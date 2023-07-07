@@ -1,47 +1,32 @@
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
-
-import CustomModal from "@/components/shared/CustomModal";
 import CustomTextInput from "../../CustomTextInput";
 import CustomTextarea from "../../CustomTextarea";
-import { editPortfolio, getOnePortfolio } from "@/services/portfolios";
-import TechnologiesCheckboxes from "../../TechnologiesCheckboxes";
+import { editPortfolio } from "@/services/portfolios";
+
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
-import {
+import IPortfolio, {
 	EditPortfolio,
 	Portfolio,
 } from "@/shared/interfaces/portfolio.interface";
 import FileUpload from "@/components/FileUpload";
-import { inputsList, editInitialValues } from "../config";
-import Loader from "@/components/shared/Loader";
+import { inputsList, validationSchema } from "../config";
+import PreviewImage from "@/components/PreviewImage";
 
 type EditPortfolioFormProps = {
 	id: string;
+	portfolio: IPortfolio;
 };
 
-const EditPortfolioForm: React.FC<EditPortfolioFormProps> = ({ id }) => {
-	const [portfolio, setPortfolio] = useState<Portfolio | any>(null);
-	const [loading, setLoading] = useState(true);
-
+const EditPortfolioForm: React.FC<EditPortfolioFormProps> = ({
+	id,
+	portfolio,
+}) => {
 	const router = useRouter();
 
-	const getCurrentPortfolioValues = async (id: string) => {
-		const response = await getOnePortfolio(id);
-		const data = response.data;
-
-		if (response.success) {
-			setPortfolio(data);
-		}
-		setLoading(false);
-	};
-
-	useEffect(() => {
-		getCurrentPortfolioValues(id);
-	}, [id]);
-
-	const formik = useFormik<EditPortfolio>({
-		initialValues: portfolio || editInitialValues,
+	const formik = useFormik<any>({
+		initialValues: portfolio,
+		validationSchema,
 		onSubmit: async values => {
 			const response = await editPortfolio(values, id);
 
@@ -50,10 +35,6 @@ const EditPortfolioForm: React.FC<EditPortfolioFormProps> = ({ id }) => {
 			}
 		},
 	});
-
-	if (loading) {
-		return <Loader />;
-	}
 
 	return (
 		<form
@@ -73,10 +54,6 @@ const EditPortfolioForm: React.FC<EditPortfolioFormProps> = ({ id }) => {
 				label="Description"
 				formik={formik}
 			/>
-
-			<TechnologiesCheckboxes formik={formik} arrayName="technologies" />
-
-			<FileUpload formik={formik} />
 
 			<div className="text-center">
 				<button

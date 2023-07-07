@@ -18,10 +18,15 @@ function SinglePortfolio() {
 		}
 	};
 	useEffect(() => {
-		if (id) fetchData(id[0]);
+		if (id) fetchData(id.toString());
 	}, []);
 
-	if (portfolio) return <div>{id && <EditPortfolioForm id={id[0]} />}</div>;
+	if (portfolio)
+		return (
+			<div>
+				{id && <EditPortfolioForm id={id.toString()} portfolio={portfolio} />}
+			</div>
+		);
 
 	return <span>Portfolio doesn't exits</span>;
 }
