@@ -7,10 +7,11 @@ import DeletePortfolio from "@/components/Forms/Portfolio/DeletePortfolio";
 import RateCard from "./RateCard";
 import { parseImg } from "@/utils/parse-img";
 import IPortfolio from "@/shared/interfaces/portfolio.interface";
-import GlassmorphismContainer from "@/components/Glassmorphism/GlassmorphismContainer";
+import { useState, useEffect } from "react";
+import { getOneUser } from "@/services/users";
 
 type IProps = {
-	portfolio: Required<IPortfolio> | any;
+	portfolio: Required<IPortfolio>;
 };
 
 function PortfolioCard({ portfolio }: IProps) {
@@ -22,9 +23,21 @@ function PortfolioCard({ portfolio }: IProps) {
 		current_votes,
 		live,
 		id,
+		created_by,
 	} = portfolio;
+	const [authorName, setAuthorName] = useState<string>("");
 	const router = useRouter();
 	const dashboardPath = "/dashboard";
+
+	const fetchData = async () => {
+		const { success, data } = await getOneUser(created_by);
+		if (success && data) {
+			return setAuthorName(data.username);
+		}
+	};
+	useEffect(() => {
+		fetchData();
+	}, []);
 
 	return (
 		<div className="text-center md:text-left max-w-lg w-auto rounded overflow-hidden shadow-lg ">
@@ -39,9 +52,11 @@ function PortfolioCard({ portfolio }: IProps) {
 				<div>
 					<div className="font-bold text-xl mb-2">{title}</div>
 					<p className="text-gray-700 text-base">{description}</p>
-					<span className="inline-block text-gray-500 text-sm font-semibold my-2">
-						By: {"authorName"}
-					</span>
+					{authorName && (
+						<span className="inline-block text-gray-500 text-sm font-semibold my-2">
+							By: {authorName}
+						</span>
+					)}
 				</div>
 				<div className="flex items-center justify-center gap-2 flex-wrap md:justify-normal">
 					<NextLink target="_blank" className="btn" href={live}>
@@ -52,6 +67,7 @@ function PortfolioCard({ portfolio }: IProps) {
 						portfolioId={id}
 						currentVotes={current_votes}
 						currentRateAvg={current_rate_avg}
+						rate_to={created_by}
 					/>
 
 					{router.pathname.includes(dashboardPath) && (

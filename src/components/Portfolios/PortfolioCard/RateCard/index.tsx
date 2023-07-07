@@ -3,16 +3,18 @@ import { ratePortfolio } from "@/services/portfolios";
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
 import { useRouter } from "next/router";
 
-interface RateCardProps {
+interface IProps {
 	currentVotes: number;
 	currentRateAvg: number;
 	portfolioId: string;
+	rate_to: string;
 }
 
-const RateCard: React.FC<RateCardProps> = ({
+const RateCard: React.FC<IProps> = ({
 	portfolioId,
 	currentRateAvg,
 	currentVotes,
+	rate_to,
 }) => {
 	const [rateNumber, setRateNumber] = useState(0);
 	const [refresh, setRefresh] = useState(0);
@@ -23,7 +25,7 @@ const RateCard: React.FC<RateCardProps> = ({
 	};
 
 	const handleGiveRate = async () => {
-		const res = await ratePortfolio(portfolioId, {
+		const res = await ratePortfolio(portfolioId, rate_to, {
 			rate: rateNumber,
 			feedback: "",
 		});

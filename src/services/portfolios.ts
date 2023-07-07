@@ -94,11 +94,12 @@ export const editPortfolio = async (portfolio: EditPortfolio, id: string) => {
 
 export const ratePortfolio = async (
 	portfolioId: string,
+	rate_to: string, // user to be rated
 	rateOptions: RatePortfolio
 ) => {
 	const options = {
 		method: "POST",
-		url: `${NEXT_PUBLIC_API_URI}/portfolios/${portfolioId}/rate`,
+		url: `${NEXT_PUBLIC_API_URI}/portfolios/${portfolioId}/rate/${rate_to}`,
 		data: rateOptions,
 	};
 
