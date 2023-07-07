@@ -5,6 +5,7 @@ import axios from "axios";
 const NEXT_PUBLIC_API_URI = process.env.NEXT_PUBLIC_API_URI;
 
 export const login = async (credentials: AuthLogin) => {
+	console.log(credentials, typeof credentials);
 	const options = {
 		method: "POST",
 		url: `${NEXT_PUBLIC_API_URI}/auth/login`,
@@ -20,7 +21,7 @@ export const login = async (credentials: AuthLogin) => {
 		const data = await res.data;
 		return data;
 	} catch (err) {
-		errorApiReqHandler(err);
+		return errorApiReqHandler(err);
 	}
 };
 

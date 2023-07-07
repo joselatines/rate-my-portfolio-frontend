@@ -3,11 +3,10 @@ import * as Yup from "yup";
 import CustomTextInput from "../CustomTextInput";
 import { login as apiLogin } from "@/services/auth";
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
-import { AuthSignUp } from "@/shared/interfaces/auth.interface";
+import { AuthLogin } from "@/shared/interfaces/auth.interface";
 import { useRouter } from "next/router";
 import { useContextUser } from "@/hooks/useContextUser";
 import Cookies from "js-cookie";
-import { toast } from "react-hot-toast";
 
 const validationSchema = Yup.object({
 	password: Yup.string()
@@ -20,27 +19,24 @@ const validationSchema = Yup.object({
 const initialValues = {
 	password: "",
 	email: "",
-	username: "",
 };
 
 function LoginForm() {
 	const router = useRouter();
 	const { login } = useContextUser();
 
-	const handleSubmit = async (credentials: AuthSignUp) => {
-		try {
-			const res = await apiLogin(credentials);
+	const handleSubmit = async (credentials: AuthLogin) => {
+		console.log({ credentials });
+		const res = await apiLogin(credentials);
+
+		console.log({res});
+		if (toastCheckApiResponse(res)) {
 			const { data } = res;
 			const user = JSON.stringify(data);
-
 			Cookies.set("access_token", data.token);
-			Cookies.set("user", user);
-			toast.success("Logged successfully");
+			Cookies.set("user", user);;
 			router.push("/portfolios");
 			login();
-		} catch (error) {
-			console.error(error);
-			toast.error("Something went wrong");
 		}
 	};
 
