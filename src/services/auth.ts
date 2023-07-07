@@ -5,7 +5,6 @@ import axios from "axios";
 const NEXT_PUBLIC_API_URI = process.env.NEXT_PUBLIC_API_URI;
 
 export const login = async (credentials: AuthLogin) => {
-	console.log(credentials, typeof credentials);
 	const options = {
 		method: "POST",
 		url: `${NEXT_PUBLIC_API_URI}/auth/login`,

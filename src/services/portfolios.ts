@@ -14,15 +14,15 @@ type GetPortfolio = (id: string) => Promise<IServiceResponse<IPortfolio>>;
 
 const NEXT_PUBLIC_API_URI = process.env.NEXT_PUBLIC_API_URI;
 
-// Axios request interceptor to include cookies with each request
-axios.interceptors.request.use(config => {
-	config.withCredentials = true;
-	return config;
-});
-
 export const getOnePortfolio: GetPortfolio = async (id: string) => {
+	const options = {
+		method: "GET",
+		url: `${NEXT_PUBLIC_API_URI}/portfolios/${id}`,
+		withCredentials: true,
+	};
+
 	try {
-		const res = await axios.get(`${NEXT_PUBLIC_API_URI}/portfolios/${id}`);
+		const res = await axios.request(options);
 
 		return res.data;
 	} catch (err) {
@@ -31,8 +31,14 @@ export const getOnePortfolio: GetPortfolio = async (id: string) => {
 };
 
 export const getAllPortfolios: GetPortfolios = async () => {
+	const options = {
+		method: "GET",
+		url: `${NEXT_PUBLIC_API_URI}/portfolios`,
+		withCredentials: true,
+	};
+
 	try {
-		const res = await axios.get(`${NEXT_PUBLIC_API_URI}/portfolios`);
+		const res = await axios.request(options);
 		return res.data;
 	} catch (err) {
 		return errorApiReqHandler(err);
@@ -40,8 +46,13 @@ export const getAllPortfolios: GetPortfolios = async () => {
 };
 
 export const getAllPortfoliosFromUser: GetPortfolios = async () => {
+	const options = {
+		method: "GET",
+		url: `${NEXT_PUBLIC_API_URI}/portfolios/user`,
+		withCredentials: true,
+	};
 	try {
-		const res = await axios.get(`${NEXT_PUBLIC_API_URI}/portfolios/user`);
+		const res = await axios.request(options);
 
 		return res.data;
 	} catch (err) {
@@ -58,6 +69,7 @@ export const newPortfolio = async (portfolio: CreatePortfolio) => {
 	const options = {
 		method: "POST",
 		url: `${NEXT_PUBLIC_API_URI}/portfolios`,
+		withCredentials: true,
 		headers: {
 			"Content-Type": `multipart/form-data;`,
 		},
@@ -78,6 +90,7 @@ export const editPortfolio = async (portfolio: EditPortfolio, id: string) => {
 	const options = {
 		method: "PUT",
 		url: `${NEXT_PUBLIC_API_URI}/portfolios/${id}`,
+		withCredentials: true,
 		headers: {
 			"Content-Type": `multipart/form-data;`,
 		},
@@ -98,6 +111,7 @@ export const ratePortfolio = async (
 ) => {
 	const options = {
 		method: "POST",
+		withCredentials: true,
 		url: `${NEXT_PUBLIC_API_URI}/portfolios/${portfolioId}/rate/${rate_to}`,
 		data: rateOptions,
 	};
@@ -113,6 +127,7 @@ export const ratePortfolio = async (
 export const deletePortfolio = async (id: string) => {
 	const options = {
 		method: "DELETE",
+		withCredentials: true,
 		url: `${NEXT_PUBLIC_API_URI}/portfolios/${id}`,
 	};
 
