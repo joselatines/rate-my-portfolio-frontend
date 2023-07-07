@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 const validationSchema = Yup.object({
 	password: Yup.string()
 		.label("Password is required")
-		.min(8, "password must be 8 characters min")
+		.min(2, "password must be 2 characters min")
 		.required(),
 	email: Yup.string().label("Email is required").email().required(),
 	username: Yup.string().label("Username is required").required(),
