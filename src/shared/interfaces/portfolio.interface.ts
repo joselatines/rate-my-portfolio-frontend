@@ -1,16 +1,4 @@
-export interface Portfolio {
-	technologies: string[];
-	live: string;
-	id: string;
-	title: string;
-	description: string;
-	current_votes: number;
-	current_rate_avg: number;
-	author: Author;
-	thumbnail_path: string | any;
-}
-
-export default interface IPortfolio {
+export  interface IPortfolio {
 	current_votes?: number;
 	current_rate_avg?: number;
 	id?: string;

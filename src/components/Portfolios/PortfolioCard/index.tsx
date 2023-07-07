@@ -6,7 +6,7 @@ import { HiOutlineExternalLink } from "react-icons/hi";
 import DeletePortfolio from "@/components/Forms/Portfolio/DeletePortfolio";
 import RateCard from "./RateCard";
 import { parseImg } from "@/utils/parse-img";
-import IPortfolio from "@/shared/interfaces/portfolio.interface";
+import { IPortfolio } from "@/shared/interfaces/portfolio.interface";
 import { useState, useEffect } from "react";
 import { getOneUser } from "@/services/users";
 
@@ -25,6 +25,7 @@ function PortfolioCard({ portfolio }: IProps) {
 		id,
 		created_by,
 	} = portfolio;
+
 	const [authorName, setAuthorName] = useState<string>("");
 	const router = useRouter();
 	const dashboardPath = "/dashboard";
@@ -37,7 +38,7 @@ function PortfolioCard({ portfolio }: IProps) {
 	};
 	useEffect(() => {
 		fetchData();
-	}, []);
+	}, [created_by]);
 
 	return (
 		<div className="text-center md:text-left max-w-lg w-auto rounded overflow-hidden shadow-lg ">

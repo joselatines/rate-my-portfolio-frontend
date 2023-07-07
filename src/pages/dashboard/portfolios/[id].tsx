@@ -1,6 +1,6 @@
 import EditPortfolioForm from "@/components/Forms/Portfolio/EditPortfolioForm";
 import { getOnePortfolio } from "@/services/portfolios";
-import IPortfolio from "@/shared/interfaces/portfolio.interface";
+import { IPortfolio } from "@/shared/interfaces/portfolio.interface";
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -19,7 +19,7 @@ function SinglePortfolio() {
 	};
 	useEffect(() => {
 		if (id) fetchData(id.toString());
-	}, []);
+	}, [id]);
 
 	if (portfolio)
 		return (
@@ -28,7 +28,7 @@ function SinglePortfolio() {
 			</div>
 		);
 
-	return <span>Portfolio doesn't exits</span>;
+	return <span>Portfolio does not exits</span>;
 }
 
 export default SinglePortfolio;

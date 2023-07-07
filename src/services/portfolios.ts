@@ -2,16 +2,15 @@ import { errorApiReqHandler } from "@/errors/error-api-req-handler";
 import {
 	CreatePortfolio,
 	EditPortfolio,
-	Portfolio,
+	IPortfolio,
 	RatePortfolio,
 } from "@/shared/interfaces/portfolio.interface";
-import { objectToFormData } from "@/utils/object-to-formData";
 import { serialize } from "object-to-formdata";
 import axios from "axios";
 import { IServiceResponse } from "./service-response.interface";
 
-type GetPortfolios = () => Promise<IServiceResponse<Portfolio[]>>;
-type GetPortfolio = (id: string) => Promise<IServiceResponse<Portfolio>>;
+type GetPortfolios = () => Promise<IServiceResponse<IPortfolio[]>>;
+type GetPortfolio = (id: string) => Promise<IServiceResponse<IPortfolio>>;
 
 const NEXT_PUBLIC_API_URI = process.env.NEXT_PUBLIC_API_URI;
 

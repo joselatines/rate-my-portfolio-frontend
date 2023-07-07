@@ -1,9 +1,9 @@
 import PortfoliosSection from "@/components/Portfolios/Section";
 import { getAllPortfolios } from "@/services/portfolios";
-import IPortfolio from "@/shared/interfaces/portfolio.interface";
+import { IPortfolio } from "@/shared/interfaces/portfolio.interface";
 
 type IProps = {
-	portfolios: IPortfolio[];
+	portfolios: Required<IPortfolio>[];
 };
 
 export default function Portfolios({ portfolios }: IProps) {
@@ -17,7 +17,7 @@ export default function Portfolios({ portfolios }: IProps) {
 
 export async function getStaticProps() {
 	let { data, success } = await getAllPortfolios();
-	
+
 	const p = {
 		message: "Get all items",
 		success: true,

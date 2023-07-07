@@ -10,12 +10,12 @@ interface IProps {
 	rate_to: string;
 }
 
-const RateCard: React.FC<IProps> = ({
+const RateCard = ({
 	portfolioId,
 	currentRateAvg,
 	currentVotes,
 	rate_to,
-}) => {
+}: IProps) => {
 	const [rateNumber, setRateNumber] = useState(0);
 	const [refresh, setRefresh] = useState(0);
 	const router = useRouter();

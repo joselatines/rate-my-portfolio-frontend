@@ -3,15 +3,9 @@ import { useFormik } from "formik";
 import CustomTextInput from "../../CustomTextInput";
 import CustomTextarea from "../../CustomTextarea";
 import { editPortfolio } from "@/services/portfolios";
-
 import { toastCheckApiResponse } from "@/utils/toast-check-api-response";
-import IPortfolio, {
-	EditPortfolio,
-	Portfolio,
-} from "@/shared/interfaces/portfolio.interface";
-import FileUpload from "@/components/FileUpload";
+import { IPortfolio } from "@/shared/interfaces/portfolio.interface";
 import { inputsList, validationSchema } from "../config";
-import PreviewImage from "@/components/PreviewImage";
 
 type EditPortfolioFormProps = {
 	id: string;
